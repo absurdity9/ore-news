@@ -732,3 +732,161 @@ button {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-4px); }
 }
+
+/* ===== Responsive ===== */
+
+/* Tablet */
+@media (max-width: 1023px) {
+    .shelf-items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cd-items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .pixel-miner {
+        width: 64px;
+        height: 90px;
+        transform: scale(0.7);
+        transform-origin: bottom center;
+    }
+
+    .newsstand {
+        max-width: 560px;
+    }
+
+    .magazine-cover {
+        max-width: 110px;
+    }
+
+    .cd-disc {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    /* Hamburger visible */
+    .hamburger {
+        display: flex;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--header-bg);
+        border-bottom: 3px solid var(--wood-dark);
+        flex-direction: column;
+        padding: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .main-nav.open {
+        display: flex;
+    }
+
+    .main-nav a {
+        padding: 0.75rem 1rem;
+        border-radius: 4px;
+    }
+
+    /* Hamburger animation */
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Header */
+    .site-header {
+        position: relative;
+    }
+
+    .logo h1 {
+        font-size: 0.65rem;
+    }
+
+    .logo h1 span {
+        font-size: 0.5rem;
+    }
+
+    /* Scene */
+    .scene-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pixel-miner {
+        display: none;
+    }
+
+    /* Shelf */
+    .shelf-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        min-height: 130px;
+    }
+
+    .cd-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .newsstand {
+        max-width: 100%;
+    }
+
+    .magazine-cover {
+        max-width: 120px;
+    }
+
+    .cd-disc {
+        width: 70px;
+        height: 70px;
+    }
+
+    .newsstand-plaque h2 {
+        font-size: 0.55rem;
+    }
+
+    .cave-scene {
+        padding: 1rem 0.5rem 2rem;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 400px) {
+    .logo h1 {
+        font-size: 0.55rem;
+    }
+
+    .logo h1 span {
+        display: none;
+    }
+
+    .magazine-cover {
+        max-width: 100px;
+    }
+
+    .cd-disc {
+        width: 60px;
+        height: 60px;
+    }
+
+    .cover-masthead {
+        font-size: 0.35rem;
+    }
+
+    .cd-name {
+        font-size: 0.35rem;
+    }
+}
