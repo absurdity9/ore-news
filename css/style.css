@@ -475,3 +475,117 @@ button {
     color: var(--gold);
     padding: 2rem;
 }
+
+/* ===== CD Items ===== */
+.cd-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.cd-disc {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 50% 50%,
+            transparent 18px,
+            rgba(0,0,0,0.3) 18px,
+            rgba(0,0,0,0.3) 20px,
+            var(--cd-color, #4a9eff) 20px,
+            var(--cd-color, #4a9eff) 22px,
+            transparent 22px,
+            transparent 24px,
+            rgba(255,255,255,0.1) 24px,
+            rgba(255,255,255,0.1) 25px,
+            transparent 25px
+        ),
+        conic-gradient(
+            from 0deg,
+            rgba(255,255,255,0.15) 0deg,
+            transparent 30deg,
+            rgba(255,255,255,0.1) 90deg,
+            transparent 120deg,
+            rgba(255,255,255,0.15) 180deg,
+            transparent 210deg,
+            rgba(255,255,255,0.1) 270deg,
+            transparent 300deg,
+            rgba(255,255,255,0.15) 360deg
+        ),
+        radial-gradient(circle at 50% 50%,
+            #f5f5f5 16px,
+            #e0e0e0 17px,
+            var(--cd-color, #4a9eff) 18px
+        ),
+        linear-gradient(135deg,
+            color-mix(in srgb, var(--cd-color, #4a9eff) 70%, #000) 0%,
+            var(--cd-color, #4a9eff) 50%,
+            color-mix(in srgb, var(--cd-color, #4a9eff) 70%, #fff) 100%
+        );
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.4),
+        inset 0 0 20px rgba(0,0,0,0.1);
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+.cd-hole {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, #f5f5f5 5px, #d0d0d0 6px, #888 7px, transparent 8px);
+}
+
+.cd-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.12);
+}
+
+.cd-name {
+    font-family: var(--font-sans);
+    font-size: 0.45rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.cd-cta {
+    font-family: var(--font-sans);
+    font-size: 0.55rem;
+    color: var(--gold);
+    opacity: 0.8;
+    margin-top: 0.4rem;
+    transition: opacity 0.2s, color 0.2s;
+}
+
+/* Hover */
+.cd-item:hover .cd-disc {
+    transform: rotate(15deg);
+    box-shadow:
+        0 4px 16px rgba(0,0,0,0.5),
+        0 0 20px rgba(var(--cd-color, 74, 158, 255), 0.3);
+}
+
+.cd-item:hover .cd-cta {
+    opacity: 1;
+    color: var(--crystal-blue);
+}
