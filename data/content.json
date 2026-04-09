@@ -1,0 +1,94 @@
+{
+  "magazines": [
+    {
+      "id": "issue-42",
+      "title": "The Blue Crystal Cavern",
+      "issueNumber": 42,
+      "theme": "crystal",
+      "url": "https://example.com/issue-42",
+      "row": 1
+    },
+    {
+      "id": "issue-43",
+      "title": "Safety Protocols Updated",
+      "issueNumber": 43,
+      "theme": "safety",
+      "url": "https://example.com/issue-43",
+      "row": 1
+    },
+    {
+      "id": "issue-44",
+      "title": "New Shovel Review",
+      "issueNumber": 44,
+      "theme": "shovel",
+      "url": "https://example.com/issue-44",
+      "row": 1
+    },
+    {
+      "id": "issue-45",
+      "title": "Deepmine Expedition Log",
+      "issueNumber": 45,
+      "theme": "cart",
+      "url": "https://example.com/issue-45",
+      "row": 1
+    },
+    {
+      "id": "issue-46",
+      "title": "Gemstone Market Report",
+      "issueNumber": 46,
+      "theme": "gem",
+      "url": "https://example.com/issue-46",
+      "row": 2
+    },
+    {
+      "id": "issue-47",
+      "title": "Tunnel Engineering 101",
+      "issueNumber": 47,
+      "theme": "tunnel",
+      "url": "https://example.com/issue-47",
+      "row": 2
+    },
+    {
+      "id": "issue-48",
+      "title": "Lantern Maintenance Guide",
+      "issueNumber": 48,
+      "theme": "lantern",
+      "url": "https://example.com/issue-48",
+      "row": 2
+    },
+    {
+      "id": "issue-49",
+      "title": "Dynamite Safety Handbook",
+      "issueNumber": 49,
+      "theme": "dynamite",
+      "url": "https://example.com/issue-49",
+      "row": 2
+    }
+  ],
+  "cds": [
+    {
+      "id": "ep-1",
+      "title": "Ore Insider Ep 1",
+      "color": "#4a9eff",
+      "url": "https://example.com/ep-1"
+    },
+    {
+      "id": "ep-2",
+      "title": "Ore Insider Ep 2",
+      "color": "#ff9e4a",
+      "url": "https://example.com/ep-2"
+    },
+    {
+      "id": "ep-3",
+      "title": "Ore Insider Ep 3",
+      "color": "#4aff9e",
+      "url": "https://example.com/ep-3"
+    },
+    {
+      "id": "ep-4",
+      "title": "Ore Insider Ep 4",
+      "color": "#ff4a9e",
+      "url": "https://example.com/ep-4"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OreNews: The Miners News Stand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Lora:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <svg class="pickaxe-icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="14" y="8" width="4" height="20" rx="1" fill="#8B7355"/>
+                    <rect x="6" y="2" width="20" height="8" rx="2" fill="#7B8794"/>
+                    <rect x="8" y="4" width="16" height="4" fill="#9AA5B1"/>
+                    <rect x="6" y="2" width="4" height="4" fill="#627D98"/>
+                    <rect x="22" y="2" width="4" height="4" fill="#627D98"/>
+                </svg>
+                <h1>OreNews : <span>The Miners News Stand</span></h1>
+            </a>
+            <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="main-nav">
+                <a href="#" class="active">Home</a>
+                <a href="#">Archive</a>
+                <a href="#">Donate</a>
+                <a href="#">Deep Dive</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="cave-scene">
+        <div class="cave-crystals"></div>
+        <div class="scene-content">
+            <div class="pixel-miner" aria-hidden="true"></div>
+            <div class="newsstand">
+                <div class="newsstand-plaque">
+                    <h2>MINE NEWS &amp; ISSUES</h2>
+                </div>
+                <div class="shelf" id="shelf-row-1">
+                    <div class="shelf-items"></div>
+                    <div class="shelf-board"></div>
+                </div>
+                <div class="shelf" id="shelf-row-2">
+                    <div class="shelf-items"></div>
+                    <div class="shelf-board"></div>
+                </div>
+                <div class="cd-rack" id="cd-rack">
+                    <div class="cd-items"></div>
+                </div>
+                <div class="newsstand-base"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Copyright &copy; 2022 News. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
