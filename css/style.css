@@ -243,3 +243,113 @@ button {
     max-width: 900px;
     width: 100%;
 }
+
+/* ===== Newsstand ===== */
+.newsstand {
+    background:
+        /* Wood grain effect */
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            rgba(0,0,0,0.03) 2px,
+            transparent 4px
+        ),
+        linear-gradient(
+            180deg,
+            #8b6914 0%,
+            #7a5c12 20%,
+            #6b5010 50%,
+            #7a5c12 80%,
+            #8b6914 100%
+        );
+    border: 4px solid var(--wood-dark);
+    border-radius: 8px;
+    padding: 0;
+    width: 100%;
+    max-width: 720px;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* Plaque */
+.newsstand-plaque {
+    background:
+        linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+    border: 3px solid var(--wood-dark);
+    border-radius: 4px;
+    margin: 1rem auto 0.5rem;
+    padding: 0.5rem 1.5rem;
+    width: fit-content;
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,0.5),
+        0 2px 4px rgba(0,0,0,0.3);
+}
+
+.newsstand-plaque h2 {
+    font-family: var(--font-pixel);
+    font-size: 0.7rem;
+    color: var(--text-dark);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* Shelf row */
+.shelf {
+    padding: 0.75rem 1rem 0;
+    position: relative;
+}
+
+.shelf-items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    padding: 0 0.5rem;
+    min-height: 160px;
+    align-items: end;
+}
+
+/* The wooden shelf board */
+.shelf-board {
+    height: 12px;
+    margin-top: 0.5rem;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            rgba(0,0,0,0.05) 1px,
+            transparent 3px
+        ),
+        linear-gradient(180deg, #9a7530 0%, #7a5c12 40%, #5c3a1e 100%);
+    border-radius: 2px;
+    box-shadow:
+        0 3px 6px rgba(0,0,0,0.4),
+        inset 0 1px 1px rgba(255,255,255,0.15);
+}
+
+/* CD Rack */
+.cd-rack {
+    padding: 0.75rem 1rem;
+    border-top: 3px solid rgba(0,0,0,0.2);
+    margin-top: 0.25rem;
+}
+
+.cd-items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    padding: 0 0.5rem;
+    min-height: 120px;
+    align-items: center;
+}
+
+/* Newsstand base */
+.newsstand-base {
+    height: 16px;
+    background:
+        linear-gradient(180deg, #5c3a1e 0%, #4a2e16 50%, #3d2510 100%);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
