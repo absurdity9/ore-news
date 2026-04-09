@@ -589,3 +589,146 @@ button {
     opacity: 1;
     color: var(--crystal-blue);
 }
+
+/* ===== Pixel Miner Character ===== */
+.pixel-miner {
+    width: 96px;
+    height: 128px;
+    flex-shrink: 0;
+    image-rendering: pixelated;
+    position: relative;
+    align-self: flex-end;
+    margin-bottom: 1rem;
+
+    /* Build the miner with box-shadows on a single pixel unit */
+    /* Each shadow is a 6px "pixel" block */
+    background: transparent;
+}
+
+.pixel-miner::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+    box-shadow:
+        /* Hat - pointy wizard/miner hat (blue) */
+        42px -120px 0 0 #2255aa,
+        48px -120px 0 0 #2255aa,
+        36px -114px 0 0 #2255aa,
+        42px -114px 0 0 #3366bb,
+        48px -114px 0 0 #3366bb,
+        54px -114px 0 0 #2255aa,
+        30px -108px 0 0 #2255aa,
+        36px -108px 0 0 #3366bb,
+        42px -108px 0 0 #4477cc,
+        48px -108px 0 0 #4477cc,
+        54px -108px 0 0 #3366bb,
+        60px -108px 0 0 #2255aa,
+        24px -102px 0 0 #2255aa,
+        30px -102px 0 0 #3366bb,
+        36px -102px 0 0 #4477cc,
+        42px -102px 0 0 #4477cc,
+        48px -102px 0 0 #4477cc,
+        54px -102px 0 0 #3366bb,
+        60px -102px 0 0 #2255aa,
+
+        /* Face */
+        30px -96px 0 0 #e8c8a0,
+        36px -96px 0 0 #e8c8a0,
+        42px -96px 0 0 #e8c8a0,
+        48px -96px 0 0 #e8c8a0,
+        54px -96px 0 0 #e8c8a0,
+        30px -90px 0 0 #e8c8a0,
+        36px -90px 0 0 #222,
+        42px -90px 0 0 #e8c8a0,
+        48px -90px 0 0 #222,
+        54px -90px 0 0 #e8c8a0,
+        30px -84px 0 0 #e8c8a0,
+        36px -84px 0 0 #e8c8a0,
+        42px -84px 0 0 #d4a880,
+        48px -84px 0 0 #e8c8a0,
+        54px -84px 0 0 #e8c8a0,
+
+        /* Body (blue tunic) */
+        24px -78px 0 0 #3366bb,
+        30px -78px 0 0 #3366bb,
+        36px -78px 0 0 #4477cc,
+        42px -78px 0 0 #4477cc,
+        48px -78px 0 0 #4477cc,
+        54px -78px 0 0 #3366bb,
+        60px -78px 0 0 #3366bb,
+        18px -72px 0 0 #4477cc,
+        24px -72px 0 0 #3366bb,
+        30px -72px 0 0 #4477cc,
+        36px -72px 0 0 #d4a843,
+        42px -72px 0 0 #4477cc,
+        48px -72px 0 0 #d4a843,
+        54px -72px 0 0 #4477cc,
+        60px -72px 0 0 #3366bb,
+        66px -72px 0 0 #4477cc,
+        18px -66px 0 0 #e8c8a0,
+        24px -66px 0 0 #3366bb,
+        30px -66px 0 0 #4477cc,
+        36px -66px 0 0 #4477cc,
+        42px -66px 0 0 #4477cc,
+        48px -66px 0 0 #4477cc,
+        54px -66px 0 0 #4477cc,
+        60px -66px 0 0 #3366bb,
+        66px -66px 0 0 #e8c8a0,
+        24px -60px 0 0 #3366bb,
+        30px -60px 0 0 #3366bb,
+        36px -60px 0 0 #4477cc,
+        42px -60px 0 0 #4477cc,
+        48px -60px 0 0 #4477cc,
+        54px -60px 0 0 #3366bb,
+        60px -60px 0 0 #3366bb,
+
+        /* Belt */
+        30px -54px 0 0 #8B7355,
+        36px -54px 0 0 #8B7355,
+        42px -54px 0 0 #d4a843,
+        48px -54px 0 0 #8B7355,
+        54px -54px 0 0 #8B7355,
+
+        /* Legs (blue) */
+        30px -48px 0 0 #2255aa,
+        36px -48px 0 0 #3366bb,
+        42px -48px 0 0 #2a2a3a,
+        48px -48px 0 0 #3366bb,
+        54px -48px 0 0 #2255aa,
+        30px -42px 0 0 #2255aa,
+        36px -42px 0 0 #3366bb,
+        48px -42px 0 0 #3366bb,
+        54px -42px 0 0 #2255aa,
+        30px -36px 0 0 #2255aa,
+        36px -36px 0 0 #2255aa,
+        48px -36px 0 0 #2255aa,
+        54px -36px 0 0 #2255aa,
+
+        /* Boots (brown) */
+        24px -30px 0 0 #5c3a1e,
+        30px -30px 0 0 #5c3a1e,
+        36px -30px 0 0 #5c3a1e,
+        48px -30px 0 0 #5c3a1e,
+        54px -30px 0 0 #5c3a1e,
+        60px -30px 0 0 #5c3a1e,
+        24px -24px 0 0 #4a2e16,
+        30px -24px 0 0 #4a2e16,
+        36px -24px 0 0 #4a2e16,
+        48px -24px 0 0 #4a2e16,
+        54px -24px 0 0 #4a2e16,
+        60px -24px 0 0 #4a2e16;
+}
+
+/* Idle bobbing animation */
+.pixel-miner {
+    animation: miner-bob 2s ease-in-out infinite;
+}
+
+@keyframes miner-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
