@@ -904,3 +904,19 @@ button {
     font-size: 0.8rem;
     color: rgba(232, 220, 200, 0.6);
 }
+
+/* ===== Ground dirt texture ===== */
+.cave-scene::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background:
+        radial-gradient(ellipse 30px 15px at 20% 80%, rgba(139, 105, 20, 0.3) 0%, transparent 70%),
+        radial-gradient(ellipse 40px 12px at 50% 90%, rgba(139, 105, 20, 0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 35px 10px at 80% 85%, rgba(139, 105, 20, 0.25) 0%, transparent 70%),
+        linear-gradient(180deg, transparent 0%, rgba(92, 64, 51, 0.5) 60%, rgba(75, 50, 38, 0.8) 100%);
+    pointer-events: none;
+}
