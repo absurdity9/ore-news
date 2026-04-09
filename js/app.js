@@ -164,7 +164,11 @@ function getCoverSVG(theme) {
 
 function showError() {
     const row1 = document.querySelector('#shelf-row-1 .shelf-items');
+    const row2 = document.querySelector('#shelf-row-2 .shelf-items');
+    const cdRack = document.querySelector('#cd-rack .cd-items');
     row1.innerHTML = '<p class="shelf-error">No issues available. Check back soon!</p>';
+    row2.innerHTML = '';
+    cdRack.innerHTML = '';
 }
 
 function setupHamburger() {
