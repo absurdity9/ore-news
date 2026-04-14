@@ -1,4 +1,8 @@
 {
+  "donate": {
+    "network": "Solana",
+    "address": "84qszDVTx7JQsWjpTRGSjxzpy4m8anu8RmZH99wTTHkq"
+  },
   "magazines": [
     {
       "id": "issue-42",
@@ -68,27 +72,39 @@
   "cds": [
     {
       "id": "ep-1",
-      "title": "Ore Insider Ep 1",
+      "episode": 1,
+      "title": "Insiders chat with Graeme Smith (@Fyvieloon)",
       "color": "#4a9eff",
-      "url": "https://example.com/ep-1"
+      "videoId": "wV-oMcOgHMc",
+      "thumbnail": "https://i.ytimg.com/vi/wV-oMcOgHMc/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=wV-oMcOgHMc&list=PL5b3Yh4V54D09B2TfSEozo2O-BDVT-3Ar"
     },
     {
       "id": "ep-2",
-      "title": "Ore Insider Ep 2",
+      "episode": 2,
+      "title": "CraggleBear's Crypto Journey, CompoundOre Flywheel & the Minemaster Competition",
       "color": "#ff9e4a",
-      "url": "https://example.com/ep-2"
+      "videoId": "_xsNWpL6G3s",
+      "thumbnail": "https://i.ytimg.com/vi/_xsNWpL6G3s/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=_xsNWpL6G3s&list=PL5b3Yh4V54D09B2TfSEozo2O-BDVT-3Ar"
     },
     {
       "id": "ep-3",
-      "title": "Ore Insider Ep 3",
+      "episode": 3,
+      "title": "RHBCrypto: From ORE v1 Grind to Long-Term Conviction",
       "color": "#4aff9e",
-      "url": "https://example.com/ep-3"
+      "videoId": "cA7DUbVCSBE",
+      "thumbnail": "https://i.ytimg.com/vi/cA7DUbVCSBE/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=cA7DUbVCSBE&list=PL5b3Yh4V54D09B2TfSEozo2O-BDVT-3Ar"
     },
     {
       "id": "ep-4",
-      "title": "Ore Insider Ep 4",
+      "episode": 4,
+      "title": "MadHatter: Why Bitcoin Is Falling Into the Same Trap as Fiat",
       "color": "#ff4a9e",
-      "url": "https://example.com/ep-4"
+      "videoId": "PC4-yLzwKI0",
+      "thumbnail": "https://i.ytimg.com/vi/PC4-yLzwKI0/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=PC4-yLzwKI0&list=PL5b3Yh4V54D09B2TfSEozo2O-BDVT-3Ar"
     }
   ]
 }

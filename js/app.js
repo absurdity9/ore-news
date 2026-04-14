@@ -12,6 +12,7 @@ async function loadContent() {
         const data = await response.json();
         renderMagazines(data.magazines);
         renderCDs(data.cds);
+        renderDonate(data.donate);
     } catch (err) {
         console.error('Failed to load content:', err);
         showError();
@@ -34,7 +35,7 @@ function createMagazineEl(mag) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.className = 'magazine-item';
-    link.setAttribute('aria-label', `Issue #${mag.issueNumber}: ${mag.title} (Click to Read)`);
+    link.setAttribute('aria-label', `Issue #${mag.issueNumber}: ${mag.title} (Tap to Read)`);
 
     link.innerHTML = `
         <div class="magazine-cover" data-theme="${mag.theme}">
@@ -48,7 +49,7 @@ function createMagazineEl(mag) {
         </div>
         <div class="magazine-label">
             <span class="magazine-title">Issue #${mag.issueNumber}: ${mag.title}</span>
-            <span class="magazine-cta">(Click to Read)</span>
+            <span class="magazine-cta">(Tap to Read)</span>
         </div>
     `;
 
@@ -69,19 +70,89 @@ function createCDEl(cd) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.className = 'cd-item';
-    link.setAttribute('aria-label', `${cd.title} (Click to Play)`);
+    const ariaPrefix = cd.episode ? `Ore Insiders Ep. ${cd.episode}: ` : '';
+    link.setAttribute('aria-label', `${ariaPrefix}${cd.title} (Tap to Play)`);
+
+    const epLabel = cd.episode ? `Ep. ${cd.episode}` : cd.title;
+    const thumb = cd.thumbnail
+        ? `<img class="cd-thumb" src="${cd.thumbnail}" alt="" loading="lazy" />`
+        : `<span class="cd-name">${cd.title}</span>`;
 
     link.innerHTML = `
         <div class="cd-disc" style="--cd-color: ${cd.color}">
             <div class="cd-label">
-                <span class="cd-name">${cd.title}</span>
+                ${thumb}
             </div>
             <div class="cd-hole"></div>
         </div>
-        <span class="cd-cta">(Click to Play)</span>
+        <span class="cd-ep">${epLabel}</span>
+        <span class="cd-cta">(Tap to Play)</span>
     `;
 
     return link;
+}
+
+function renderDonate(donate) {
+    const rack = document.querySelector('#donate-rack');
+    if (!rack || !donate) return;
+
+    const address = donate.address || '';
+    const network = donate.network || 'Solana';
+
+    rack.innerHTML = `
+        <div class="donate-chest">
+            <div class="donate-gem" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="44" height="44">
+                    <defs>
+                        <linearGradient id="solGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#9945FF"/>
+                            <stop offset="50%" stop-color="#7A5BFF"/>
+                            <stop offset="100%" stop-color="#14F195"/>
+                        </linearGradient>
+                    </defs>
+                    <polygon points="16,2 28,10 28,22 16,30 4,22 4,10" fill="url(#solGrad)" stroke="#1a0f2e" stroke-width="1.5"/>
+                    <polygon points="16,2 28,10 16,14 4,10" fill="#fff" opacity="0.18"/>
+                    <polygon points="4,10 16,14 16,30 4,22" fill="#000" opacity="0.18"/>
+                    <line x1="16" y1="14" x2="16" y2="30" stroke="#fff" stroke-width="0.6" opacity="0.4"/>
+                </svg>
+            </div>
+            <div class="donate-body">
+                <div class="donate-eyebrow">
+                    <span class="donate-network">${network}</span>
+                    <span class="donate-divider">•</span>
+                    <span class="donate-hint">Pickaxes, lanterns &amp; cave coffee</span>
+                </div>
+                <button type="button" class="donate-tablet" id="donate-copy" aria-label="Copy ${network} wallet address">
+                    <code class="donate-address">${address}</code>
+                    <span class="donate-copy-icon" aria-hidden="true">
+                        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="8" height="10" rx="1"/>
+                            <path d="M5.5 3V2.5a1 1 0 011-1h6a1 1 0 011 1v8a1 1 0 01-1 1H13"/>
+                        </svg>
+                    </span>
+                    <span class="donate-copy-feedback" aria-live="polite"></span>
+                </button>
+            </div>
+        </div>
+    `;
+
+    const btn = rack.querySelector('#donate-copy');
+    const feedback = rack.querySelector('.donate-copy-feedback');
+
+    btn.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(address);
+            feedback.textContent = 'COPIED';
+            btn.classList.add('is-copied');
+            setTimeout(() => {
+                feedback.textContent = '';
+                btn.classList.remove('is-copied');
+            }, 1600);
+        } catch {
+            feedback.textContent = 'COPY FAILED';
+            setTimeout(() => { feedback.textContent = ''; }, 1600);
+        }
+    });
 }
 
 function getCoverSVG(theme) {
