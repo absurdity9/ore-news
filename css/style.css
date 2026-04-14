@@ -1021,6 +1021,327 @@ button {
     color: rgba(232, 220, 200, 0.6);
 }
 
+/* ===== Deep Dive page ===== */
+.deep-dive-body {
+    background: var(--cave-deep);
+    color: #cbd5e1;
+}
+
+.deep-dive {
+    flex: 1;
+    padding: 3rem 1.5rem 5rem;
+    position: relative;
+}
+
+.deep-dive-inner {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.deep-dive-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.deep-dive-eyebrow {
+    font-family: var(--font-pixel);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--crystal-blue);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.deep-dive-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #f5f7fa;
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+}
+
+.deep-dive-subtitle {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: rgba(203, 213, 225, 0.65);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.deep-dive-intro {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #cbd5e1;
+    margin-bottom: 1rem;
+    max-width: 70ch;
+}
+
+/* Table of contents */
+.deep-dive-toc {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 3rem;
+    background: rgba(74, 158, 255, 0.04);
+    border: 1px solid rgba(74, 158, 255, 0.15);
+    border-radius: 6px;
+}
+
+.deep-dive-toc a {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    padding: 0.25rem 0;
+    border-left: 2px solid transparent;
+    padding-left: 0.75rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.deep-dive-toc a:hover {
+    color: var(--crystal-glow);
+    border-left-color: var(--crystal-blue);
+}
+
+/* Timeline */
+.timeline {
+    list-style: none;
+    position: relative;
+    padding-left: 60px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 8px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg,
+        rgba(74, 158, 255, 0.5) 0%,
+        rgba(74, 158, 255, 0.25) 90%,
+        transparent 100%);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 80px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -60px;
+    top: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 150px;
+}
+
+.timeline-dot {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--crystal-blue);
+    box-shadow: 0 0 0 4px rgba(74, 158, 255, 0.12),
+                0 0 12px rgba(74, 158, 255, 0.5);
+    margin-left: 13px;
+}
+
+.timeline-date {
+    font-family: var(--font-pixel);
+    font-size: 0.55rem;
+    color: var(--crystal-glow);
+    margin-top: 0.6rem;
+    margin-left: 2px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.timeline-panel {
+    background: rgba(255, 255, 255, 0.015);
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.5rem 0 1.5rem 1.5rem;
+}
+
+.timeline-date-badge {
+    display: none;
+    font-family: var(--font-pixel);
+    font-size: 0.55rem;
+    color: var(--crystal-glow);
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0.6rem;
+    background: rgba(74, 158, 255, 0.1);
+    border: 1px solid rgba(74, 158, 255, 0.3);
+    border-radius: 3px;
+    margin-bottom: 0.75rem;
+    align-self: flex-start;
+}
+
+.timeline-panel h3 {
+    font-family: var(--font-pixel);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #f5f7fa;
+    margin-bottom: 1rem;
+    letter-spacing: 0.01em;
+}
+
+.timeline-panel p {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #cbd5e1;
+    margin-bottom: 1rem;
+    max-width: 68ch;
+}
+
+.timeline-panel p:last-of-type {
+    margin-bottom: 1.25rem;
+}
+
+.timeline-panel a {
+    color: var(--crystal-blue);
+    border-bottom: 1px dotted transparent;
+    transition: border-color 0.15s ease;
+}
+
+.timeline-panel a:hover {
+    border-bottom-color: var(--crystal-blue);
+}
+
+.timeline-figure {
+    margin: 1.25rem 0;
+    max-width: 100%;
+}
+
+.timeline-figure img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.timeline-figure figcaption {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: rgba(203, 213, 225, 0.6);
+    font-style: italic;
+    margin-top: 0.6rem;
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+    .deep-dive {
+        padding: 2rem 1.25rem 4rem;
+    }
+
+    .timeline {
+        padding-left: 40px;
+    }
+
+    .timeline::before {
+        left: 10px;
+    }
+
+    .timeline-marker {
+        left: -40px;
+        width: 110px;
+    }
+
+    .timeline-dot {
+        margin-left: 3px;
+        width: 12px;
+        height: 12px;
+    }
+
+    .timeline-date {
+        font-size: 0.5rem;
+    }
+
+    .timeline-panel {
+        padding-left: 1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .deep-dive {
+        padding: 1.5rem 1rem 3rem;
+    }
+
+    .deep-dive-header {
+        margin-bottom: 2rem;
+    }
+
+    /* Hide the left rail entirely on mobile */
+    .timeline {
+        padding-left: 0;
+    }
+
+    .timeline::before {
+        display: none;
+    }
+
+    .timeline-marker {
+        display: none;
+    }
+
+    .timeline-date-badge {
+        display: inline-block;
+    }
+
+    .timeline-panel {
+        padding: 0;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 1.5rem;
+    }
+
+    .timeline-item {
+        margin-bottom: 2.5rem;
+    }
+
+    .timeline-panel h3 {
+        font-size: 0.8rem;
+        line-height: 1.6;
+    }
+
+    /* Horizontal scrolling TOC chips */
+    .deep-dive-toc {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .deep-dive-toc a {
+        flex-shrink: 0;
+        padding: 0.4rem 0.75rem;
+        border-left: none;
+        border: 1px solid rgba(74, 158, 255, 0.3);
+        border-radius: 999px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    .deep-dive-toc a:hover {
+        border-left: 1px solid rgba(74, 158, 255, 0.3);
+        background: rgba(74, 158, 255, 0.1);
+    }
+}
+
 /* ===== Ground dirt texture ===== */
 .cave-scene::after {
     content: '';

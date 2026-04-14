@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Dive — The History of Ore | OreNews</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Lora:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="deep-dive-body">
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <svg class="pickaxe-icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="14" y="8" width="4" height="20" rx="1" fill="#8B7355"/>
+                    <rect x="6" y="2" width="20" height="8" rx="2" fill="#7B8794"/>
+                    <rect x="8" y="4" width="16" height="4" fill="#9AA5B1"/>
+                    <rect x="6" y="2" width="4" height="4" fill="#627D98"/>
+                    <rect x="22" y="2" width="4" height="4" fill="#627D98"/>
+                </svg>
+                <h1>OreNews: <span>The Miners News Stand</span></h1>
+            </a>
+            <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="#">Archive</a>
+                <a href="#">Donate</a>
+                <a href="deep-dive.html" class="active">Deep Dive</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="deep-dive">
+        <div class="deep-dive-inner">
+            <div class="deep-dive-header">
+                <p class="deep-dive-eyebrow">Deep Dive</p>
+                <h2 class="deep-dive-title">The History of Ore</h2>
+                <p class="deep-dive-subtitle">(since its reintroduction)</p>
+                <p class="deep-dive-intro">
+                    Ore first reintroduced itself on the 22nd October 2025. Its first and second iterations (the PoW versions of ORE) presented value leaks and led to problems that made the team redesign how mining Ore works over the good part of 6 months. With this new design, they birthed a mechanism that plugged the value leak and created a Store of Value that gained the inherent benefits of being on Solana.
+                </p>
+                <p class="deep-dive-intro">
+                    For today, we will look at the timeline and all of the great things that have been created since the reintroduction in October. From community built projects to the enhancements and developments of Ore itself, it has been a seriously busy few months.
+                </p>
+            </div>
+
+            <nav class="deep-dive-toc" aria-label="Timeline sections">
+                <a href="#s1">1. The Re-introduction</a>
+                <a href="#s2">2. The Motherlode</a>
+                <a href="#s3">3. Refining &amp; Revenue</a>
+                <a href="#s4">4. The Rise of Auto Miners</a>
+                <a href="#s5">5. Analytics Power Miners Returns</a>
+                <a href="#s6">6. DeFi Integrations Begin</a>
+                <a href="#s7">7. Open Source &amp; Supply Reduction</a>
+                <a href="#s8">8. Privacy &amp; Encrypted Money</a>
+                <a href="#s9">9. TurboORE, stORE &amp; Exponent</a>
+                <a href="#s10">10. Community Adds Fuel</a>
+            </nav>
+
+            <ol class="timeline">
+                <li class="timeline-item" id="s1">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Oct 22, 2025</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Oct 22, 2025</span>
+                        <h3>The Re-introduction</h3>
+                        <p>On October 22nd, Ore dropped a thread sharing a new 5x5 grid mining system that allowed miners 1 minute to claim a space on a block by deploying Solana. At the end of the round, one block is selected by a random number generator (on Solana) and all of the deployed Solana on the 24 losing blocks are split by the miners in proportion to the space they claimed on the winning block.</p>
+                        <p>Here is the twist: instead of splitting the Ore with every miner on that winning block, some rounds (on average ½ of rounds) the whole 1 Ore would be awarded to a single miner — very reminiscent of the single block miner you may see on Bitcoin from time to time.</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-01-p2.png" alt="The Ore 5x5 grid mining system diagram" loading="lazy">
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="timeline-item" id="s2">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Oct 2025</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Oct 2025</span>
+                        <h3>The Motherlode</h3>
+                        <p>This is where the Motherlode mechanism was introduced, adding 0.2 ORE per round to a ‘motherlode’ pool that has a 1 in 625 chance of being won by miners on the winning block. For every round where the motherlode is not hit, the ORE is accumulated, leading to motherlodes that are higher than 500 ORE. Together with the 1 ORE per round, this meant that the ORE protocol emits ~1.2 ORE per minute (as rounds are a minute each with a few seconds in between rounds).</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-02-p3.png" alt="Motherlode and revenue mechanics chart" loading="lazy">
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="timeline-item" id="s3">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Oct–Nov 2025</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Oct–Nov 2025</span>
+                        <h3>Refining &amp; Revenue</h3>
+                        <p>With this change, the mechanism of Refining came into play. A refining fee of 10% is charged to all ORE mining rewards when claimed; this fee is redistributed to other miners in proportion to their unclaimed ORE mining rewards. This meant that the longer a miner held their ORE, the more rewards they would accumulate, with APY varying depending on how many others withdrew their rewards.</p>
+                        <p>10% of the Solana from mining rewards is collected by the protocol as revenue. This does not include already accrued mining rewards. With the revenue, the protocol allocates 1% towards the team, whilst the rest is allocated to buybacks of ORE. In the first week of this new version of ORE, there were over 990 Solana to use for buybacks.</p>
+                        <p>Revenue is used to ‘bury’ ORE, which refers to burned tokens that can be mined again as long as the ORE is below its maximum supply limit — at the time of reintroduction a maximum of 5 million ORE (later changed to 3m). 90% of the ORE bought from revenue is buried whilst the other 10% is shared with stakers as yield.</p>
+                        <p>It wasn’t long after this change that ORE quickly became top of everyone’s mind, as it once had before when it stopped the Solana chain just over a year prior to this reintroduction. Miners were flocking in from all corners of the chain, and thus began the rise of the community building tools to analyze this new marvel that many have come to name a ‘probability engine’.</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-03-p4.png" alt="0xScotchPilgrim open-sources the first mining extension" loading="lazy">
+                            <figcaption>0xScotchPilgrim’s open-source mining extension post.</figcaption>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="timeline-item" id="s4">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Nov 2025</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Nov 2025</span>
+                        <h3>The Rise of Auto Miners</h3>
+                        <p>As the revenue piled up for ORE, miners started to devise different strategies to make mining more effective for themselves. This quickly turned into builders working on frontends that built on top of ORE’s protocol and allowed users to choose pre-defined strategies as well as create their own.</p>
+                        <p>From basic strategies such as bidding 22 blocks, to restrictions on the size of Solana deployed on individual blocks in combination with other restrictions such as Motherlode size, these quickly became a norm for Auto Miners.</p>
+                        <p>RefinOre, MineMore, LodeStar, OreMatic, OreMonster, EzMine — names you may have heard of by now. But you may wonder when they established themselves. The first mining extension was actually built by 0xScotchPilgrim for himself, and then he dropped a post where he open-sourced the extension that calculated +EV blocks.</p>
+                        <p>This created an explosion of Auto Miners and a huge demand for analytics sites to help miners get the most of their Solana. Early leaders established themselves and are familiar names such as the Lodestar extension by RadiantsDAO, to Privy-integrated miners from RefinOre, Gmore.fun and MineMore. By the 21st of November, the Ore ecosystem contained over 7 popular Auto Miners and two main analytics sites.</p>
+                        <p>For the next few weeks the ecosystem saw a battle of the Auto Miners with RefinOre leading, gaining up to 50% of all market share quite quickly due to their leading analytics site providing a great funnel for miners. By this time, the Seeker mobile from Solana had also launched alongside the official Ore dapp early in November. The developers within the Ore ecosystem quickly caught on and realized there is a new market to capture, and started releasing their Auto Miners on the Solana Dapp store — with Ore Miner IO showing incredible results of gaining hundreds of new users after launch (alongside a Toly retweet boosting this even further). MineMore soon followed with their launch and showed similar results with nearly 1,000 visits by Seeker users.</p>
+                        <p>Over the next few months we would see Auto Miners struggling with load demands as well as new frontends being created to mine, even as far as popular game Photofinish providing a way to mine whilst watching horse racing.</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-04-p5.png" alt="The Ore Auto Miner ecosystem" loading="lazy">
+                            <figcaption>A snapshot of the Auto Miner ecosystem.</figcaption>
+                        </figure>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-05-p6.png" alt="Wallet performance analytics" loading="lazy">
+                            <figcaption>Wallet performance view.</figcaption>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="timeline-item" id="s5">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Nov 2025</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Nov 2025</span>
+                        <h3>Analytics Power Miners Returns</h3>
+                        <p>Within just two weeks of Ore reintroducing itself, the community had realized the need for analytics to help miners. Whilst some onchain wizards such as SlxTnT were running local analytics, others such as Kriptikz created ore-mining-tracker that provided a suite of analytics and would be used by others as a source of truth due to its level of onchain efficiency. Within days, others such as Degenfaragu and Nftimm / JussCubs created analytics sites that tried to cover further information analysis about ORE.</p>
+                        <p>Whilst Kriptikz’s tool became something that devs flocked to and used as a reference themselves, RefinOre became the #1 analytics page used by most of the community and newcomers due to the reach of those involved (Nftimm &amp; JussCubs) and the wealth of information provided in an easy-to-digest manner.</p>
+                        <p>As the mining mania ensued in November and December, these analytics pages were under heavy load, and RefinOre had to constantly battle with loading times and other errors to keep up with user demand. This did not come without its rewards — one notable event being the donation of 30 Solana from well-known figure Frank Degods to RefinOre to help with their server upkeep.</p>
+                        <p>Whilst RefinOre was seen as the best in class, it was sadly not kept up to standard once the hype around Ore faded, with one of the members in Nftimm finding full-time roles first at Kamino and then at Backpack, meaning he would take a step back leaving it mostly to co-founder JussCubs. This left a hole since mid-January and, although we have the long-standing Dune Dashboards from Neil and Counterparty Research, others have tried to slowly fill the void — through either in-app analytics such as those seen in MineMore, or a new analytics page by Mapmap.</p>
+                        <p>With this, it is worth mentioning that onchain devs such as SlxTnT and Kriptikz have kept their own internal analytics, such as those seen below, that show the true TX count per day compared to those seen in the Counterparty Dune Dashboard — which seems to over-report TXs by roughly 1.5x.</p>
+                        <p>Currently, there is demand for enhanced analytics on both the mining and protocol side that is yet to be claimed. If you are reading this, it could be you!</p>
+                        <p>After the analytics page from RefinOre was placed into hiatus, the auto miner side of it lost its main funnel, leading other Auto Miners to climb up in market share. By the beginning of February, MineMore climbed up to capture the 50% dominance once held by RefinOre. They managed this through the various strategy settings a miner could use on their app, as well as by focusing on the community aspect — their own Discord allowed them to build tight-knit relationships with their users. RefinOre on the other hand expanded their offerings in other ways, enabling most SPL tokens to be used for mining and adding functionality that allowed AI agents to mine — utilizing the explosion of Openclaw/Moltbot as an opportunity to gain traction in that arena.</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-06-p7.png" alt="Production cost on RefinOre analytics" loading="lazy">
+                            <figcaption>Production cost on RefinOre analytics.</figcaption>
+                        </figure>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-07-p8.png" alt="Total transactions per day on the OreV3 program" loading="lazy">
+                            <figcaption>Total TXs per day for the OreV3 program, by Kriptikz.</figcaption>
+                        </figure>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-08-p8.png" alt="Transaction volume comparison chart" loading="lazy">
+                            <figcaption>Comparison of reported TX counts.</figcaption>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="timeline-item" id="s6">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Nov 2025</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Nov 2025</span>
+                        <h3>DeFi Integrations Begin</h3>
+                        <p>At first, miners could only really get yield from their Ore through the refined yield that comes from those who claim their mined ore, as well as staking the Ore which yielded ~20% APY. As the hype around Ore increased, more and more integrations were announced — ranging from trading platforms such as Flash Trade to popular yield platforms such as Kamino and project0.</p>
+                        <p>The first official integration announced was project0 on the 19th November, less than a month after Ore’s reintroduction. This was actually front-run by Flash Trade’s FLP8 pool that accompanied the ORE listing on the DEX, meaning people could hold ORE in the pool and get a % yield from fees traded on the Ore listing.</p>
+                        <p>One notable listing event in the same timeframe was the Humidifi quoting announced on the 17th November — a historic moment, as Ore had not been listed on any major CEX at that time, which is usually required by AMMs for an asset to be quoted by them.</p>
+                        <p>Shortly after, Pyth price feeds were enabled, which Flash Trade and project0 were early users of. The momentum at this point for ORE was accelerating at unprecedented rates, where it became the #1 app by 24hr revenue — surpassing pumpdotfun multiple times at the end of November.</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-09-p10.png" alt="Ore as a Store of Value chart" loading="lazy">
+                            <figcaption>Ore as a native Store of Value.</figcaption>
+                        </figure>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-10-p10.png" alt="Humidifi quoting announcement" loading="lazy">
+                            <figcaption>Humidifi quoting announcement.</figcaption>
+                        </figure>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-11-p10.png" alt="Ore becomes #1 app by 24hr revenue" loading="lazy">
+                            <figcaption>Ore ranked #1 by 24hr revenue.</figcaption>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="timeline-item" id="s7">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Dec 2025</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Dec 2025</span>
+                        <h3>Open Source &amp; Supply Reduction</h3>
+                        <p>The support for ORE kept accumulating at this point, with Solana explorer Solscan integration parsing support for Ore — allowing users to see finer details of Ore transactions, and allowing developers to build better copy-trade and analytics tooling.</p>
+                        <p>As Ore approached Christmas, the month of December started with an impactful decision. First, the Ore mining program became officially verified, in aid of its mission to champion open source on Solana. Secondly, the decision was made to freeze the mint authority on the contract and reduce the overall supply from 5 million down to 3 million. This came after the new mining system and its effects on net emissions showed that reaching the max supply would take a lot longer than initially planned, meaning the limit could be safely reduced.</p>
+                        <p>In fact, from the 8th of November until the 18th February, the circulating amount of Ore only increased by ~5%. Considering that 1.2 ORE is mined every minute, it means only ~10% of Ore mined makes it into circulating supply over time — and at this pace, max supply would not be reached until after 2100.</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-12-p11.png" alt="Solscan parsing support for Ore" loading="lazy">
+                            <figcaption>Solscan parsing support for Ore transactions.</figcaption>
+                        </figure>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-13-p11.png" alt="Ore supply report comparison" loading="lazy">
+                            <figcaption>Ore supply report: 8–12th November vs circulating supply on 18th February.</figcaption>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="timeline-item" id="s8">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Dec 2025</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Dec 2025</span>
+                        <h3>Privacy &amp; Encrypted Money</h3>
+                        <p>In the same month, privacy and encrypted money became a narrative that dominated the timeline, and ORE would not be the modern SoV it is without this in mind. An integration with Privacy Cash was announced on the 15th of December, meaning miners could deposit and encrypt their Solana to move it privately directly on the official Ore website. Two weeks later this was followed with an official Ore pool so that miners could encrypt their Ore. This pool became the biggest Privacy Cash pool outside of Solana itself within a single week, showing the people had a huge appetite for a private SoV that’s native to Solana.</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-14-p12.png" alt="Dune dashboard data on Privacy Cash pools" loading="lazy">
+                            <figcaption>Dune Dashboard data on Privacy Cash pools.</figcaption>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="timeline-item" id="s9">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Jan 2026</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Jan 2026</span>
+                        <h3>TurboORE, stORE &amp; Exponent</h3>
+                        <p>Within that same week, two monumental launches occurred — TurboORE powered by DefiCarrot, and the launch of stORE, ORE’s native LST that provides staking yield naturally accrued to stORE. TurboORE gave users the ability to gain leveraged exposure to Ore with liquidation protections, whilst stORE set the foundation for further DeFi integrations. This was kicked off with a Privacy Cash integration that saw it become the #1 largest shielded pool within 24 hours, indicating an insane amount of demand for shielded yield on this SoV.</p>
+                        <p>Community member David Chapman wrote an article for those who find the process of converting Ore to stORE confusing. Swaps for stORE also went live on Kamino Swap within the same day, allowing users to get best-priced swaps with 0% fee.</p>
+                        <p>Just one week later, stORE was listed on Exponent, which allowed users to split the asset into two parts: principal (PT-stORE) and yield (YT-stORE). This allows users to secure a fixed APY or speculate on the mining rewards with leveraged returns. At the same time, Ore pools in places such as Kamino kept printing returns that were unmatched — with ORE-SOL pools leading APY on Kamino for several weeks, which was unheard of considering Ore is below $100m market cap. By the 22nd of January on Kamino alone, ORE-SOL pools had printed $320k in fees.</p>
+                        <p>On the same day, the community’s main philosopher Madhatt3r (@pokerchessman on X) posted an article with the banner that read ‘Ore is our Money’, reiterating the mindset the community held on ORE and what made it so powerful in an age where most digital currencies had their designs invalidated or smeared through mechanisms such as perps.</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-15-p13.png" alt="stORE becomes the top Privacy Cash pool" loading="lazy">
+                            <figcaption>stORE becomes the top Privacy Cash shielded pool.</figcaption>
+                        </figure>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-16-p14.png" alt="Kamino ORE-SOL pool fees" loading="lazy">
+                            <figcaption>ORE-SOL pool fees on Kamino.</figcaption>
+                        </figure>
+                    </article>
+                </li>
+
+                <li class="timeline-item" id="s10">
+                    <div class="timeline-marker">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <span class="timeline-date">Jan–Feb 2026</span>
+                    </div>
+                    <article class="timeline-panel">
+                        <span class="timeline-date-badge">Jan–Feb 2026</span>
+                        <h3>Community Adds Fuel</h3>
+                        <p>Throughout the DeFi integration era Ore has recently experienced, the community has done its part to add value to the ecosystem. Whether it’s been Auto Miners such as RefinOre allowing any SPL token to be used for mining (ignited by the SKR launch that rewarded many Seeker devs and users), prediction markets starting to be launched, or novel apps such as CompoundORE.</p>
+                        <p>Whilst prediction markets have been the hype of the recent time with the rise of Polymarket and Kalshi, WhenMarket has been a prediction market for ranges of when the Motherlode hits.</p>
+                        <p>But when it comes to DeFi itself, CompoundORE is the only true ‘DeFi’ app inside the Ore ecosystem and quite an intriguing concept. It is a 0-liquidation cash-advance protocol that allows users to stake ORE and acquire assets ranging from RWAs (Gold, Silver, Copper, Stocks), JLP, to plain simple USDC. It uses the staking rewards from the current week’s yield from the staked ORE to repay the loan on the asset (with a small fee), meaning users are protected from liquidations on the loan — and once they have finished repaying using the yield, they can do this over and over again.</p>
+                        <p>There have also been informational sites built around Ore, such as one-pagers to get newcomers more acclimatized with ORE, as well as analytics pages to help make more informed decisions when looking to participate in the ecosystem.</p>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-17-p15.png" alt="WhenMarket prediction market interface" loading="lazy">
+                            <figcaption>WhenMarket — a prediction market for Motherlode timing.</figcaption>
+                        </figure>
+                        <figure class="timeline-figure">
+                            <img src="images/deep-dive/img-18-p16.png" alt="CompoundORE interface" loading="lazy">
+                            <figcaption>CompoundORE — a 0-liquidation cash-advance protocol.</figcaption>
+                        </figure>
+                    </article>
+                </li>
+            </ol>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Copyright &copy; 2022 News. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
