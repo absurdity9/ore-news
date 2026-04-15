@@ -1065,6 +1065,21 @@ button {
     border-bottom-color: var(--crystal-blue);
 }
 
+.minemore-credit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    vertical-align: middle;
+}
+
+.minemore-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    display: inline-block;
+}
+
 .noscript-archives {
     list-style: none;
     padding: 1rem;
