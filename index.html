@@ -64,33 +64,34 @@
     </script>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="index.html" class="logo" aria-label="OreNews home">
-                <svg class="pickaxe-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                    <rect x="14" y="8" width="4" height="20" rx="1" fill="#8B7355"/>
-                    <rect x="6" y="2" width="20" height="8" rx="2" fill="#7B8794"/>
-                    <rect x="8" y="4" width="16" height="4" fill="#9AA5B1"/>
-                    <rect x="6" y="2" width="4" height="4" fill="#627D98"/>
-                    <rect x="22" y="2" width="4" height="4" fill="#627D98"/>
-                </svg>
-                <p class="logo-title">OreNews<span>.supply</span></p>
-            </a>
-            <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <nav class="main-nav">
-                <a href="index.html" class="active"><i data-lucide="house"></i><span>Home</span></a>
-                <a href="deep-dive.html"><i data-lucide="telescope"></i><span>Deep Dive</span></a>
-            </nav>
-        </div>
-    </header>
-
     <main class="cave-scene">
         <h1 class="sr-only">OreNews — Mineshaft News Stand for ORE on Solana</h1>
         <div class="cave-crystals"></div>
+        <aside class="ore-tally" role="region" aria-label="ORE supply">
+            <span class="ore-tally-rivet ore-tally-rivet--tl" aria-hidden="true"></span>
+            <span class="ore-tally-rivet ore-tally-rivet--tr" aria-hidden="true"></span>
+            <span class="ore-tally-rivet ore-tally-rivet--bl" aria-hidden="true"></span>
+            <span class="ore-tally-rivet ore-tally-rivet--br" aria-hidden="true"></span>
+            <header class="ore-tally-head">
+                <a href="index.html" class="ore-tally-brand" aria-label="OreNews home">
+                    <span class="ore-tally-brand-text">orenews<span class="ore-tally-brand-tld">.supply</span></span>
+                </a>
+            </header>
+            <div class="ore-tally-grid">
+                <div class="ore-tally-stat">
+                    <span class="ore-tally-stat-label">Max Supply</span>
+                    <span class="ore-tally-stat-value"><img class="ore-glyph" src="images/ore-logo.svg" alt="" aria-hidden="true">3,000,000</span>
+                </div>
+                <div class="ore-tally-stat">
+                    <span class="ore-tally-stat-label">Circulating</span>
+                    <span class="ore-tally-stat-value"><img class="ore-glyph" src="images/ore-logo.svg" alt="" aria-hidden="true">449,835.25</span>
+                </div>
+            </div>
+            <nav class="ore-tally-nav" aria-label="Primary">
+                <a href="index.html" class="active">Home</a>
+                <a href="deep-dive.html">Deep Dive</a>
+            </nav>
+        </aside>
         <div class="scene-content">
             <div class="pixel-miner" aria-hidden="true"></div>
             <div class="newsstand">

@@ -29,10 +29,38 @@ function renderMagazines(magazines) {
     const row1 = document.querySelector('#shelf-row-1 .shelf-items');
     const row2 = document.querySelector('#shelf-row-2 .shelf-items');
 
-    magazines.forEach(mag => {
-        const target = mag.row === 1 ? row1 : row2;
-        target.appendChild(createMagazineEl(mag));
-    });
+    magazines.slice(0, 6).forEach(mag => row1.appendChild(createMagazineEl(mag)));
+    magazines.slice(6, 11).forEach(mag => row2.appendChild(createMagazineEl(mag)));
+
+    row2.appendChild(createMagazineMoreEl(magazines.length));
+}
+
+function createMagazineMoreEl(count) {
+    const link = document.createElement('a');
+    link.href = 'https://x.com/zinnresearch';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.className = 'magazine-item magazine-more';
+    link.setAttribute('aria-label', `Browse all ${count} Mineshaft Weekly dispatches on X`);
+
+    link.innerHTML = `
+        <div class="magazine-cover magazine-more-cover">
+            <span class="magazine-more-stack" aria-hidden="true">
+                <span class="magazine-more-page"></span>
+                <span class="magazine-more-page"></span>
+                <span class="magazine-more-page"></span>
+            </span>
+            <span class="magazine-more-eyebrow">Mineshaft Archive</span>
+            <span class="magazine-more-title">All Issues</span>
+            <span class="magazine-more-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="magazine-label">
+            <span class="magazine-title">All ${count} Dispatches</span>
+            <span class="magazine-cta">(Tap to Browse)</span>
+        </div>
+    `;
+
+    return link;
 }
 
 function createMagazineEl(mag) {
@@ -65,9 +93,34 @@ function createMagazineEl(mag) {
 function renderCDs(cds) {
     const rack = document.querySelector('#cd-rack .cd-items');
 
-    cds.forEach(cd => {
+    cds.slice(0, 4).forEach(cd => {
         rack.appendChild(createCDEl(cd));
     });
+
+    rack.appendChild(createCDMoreEl(cds.length));
+}
+
+function createCDMoreEl(count) {
+    const link = document.createElement('a');
+    link.href = 'https://www.youtube.com/playlist?list=PL5b3Yh4V54D09B2TfSEozo2O-BDVT-3Ar';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.className = 'cd-item cd-more';
+    link.setAttribute('aria-label', `Browse all ${count} Ore Insiders episodes on YouTube`);
+
+    link.innerHTML = `
+        <div class="cd-disc cd-more-disc" aria-hidden="true">
+            <div class="cd-label cd-more-label">
+                <span class="cd-more-plus">+</span>
+                <span class="cd-more-text">MORE</span>
+            </div>
+            <div class="cd-hole"></div>
+        </div>
+        <span class="cd-ep">Full Playlist</span>
+        <span class="cd-cta">(Tap to Play)</span>
+    `;
+
+    return link;
 }
 
 function createCDEl(cd) {
@@ -112,8 +165,6 @@ function renderDonate(donate) {
             </div>
             <div class="donate-body">
                 <div class="donate-eyebrow">
-                    <span class="donate-network">${network}</span>
-                    <span class="donate-divider">•</span>
                     <span class="donate-hint">Pickaxes, lanterns &amp; cave coffee</span>
                 </div>
                 <button type="button" class="donate-tablet" id="donate-copy" aria-label="Copy ${network} wallet address">
@@ -239,6 +290,7 @@ function showError() {
 function setupHamburger() {
     const btn = document.querySelector('.hamburger');
     const nav = document.querySelector('.main-nav');
+    if (!btn || !nav) return;
 
     btn.addEventListener('click', () => {
         const expanded = btn.getAttribute('aria-expanded') === 'true';

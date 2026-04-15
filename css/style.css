@@ -189,37 +189,14 @@ button {
     flex: 1;
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 2rem;
     padding: 2rem 1rem 3rem;
     min-height: calc(100vh - 60px);
 
-    /* Layered cave background */
-    background:
-        /* Stalactites along the top */
-        radial-gradient(ellipse 60px 35px at 10% 0%, #3a3028 65%, transparent 66%),
-        radial-gradient(ellipse 45px 50px at 25% 0%, #2d2520 65%, transparent 66%),
-        radial-gradient(ellipse 70px 30px at 45% 0%, #3a3028 65%, transparent 66%),
-        radial-gradient(ellipse 40px 45px at 60% 0%, #2d2520 65%, transparent 66%),
-        radial-gradient(ellipse 55px 38px at 78% 0%, #3a3028 65%, transparent 66%),
-        radial-gradient(ellipse 50px 42px at 92% 0%, #2d2520 65%, transparent 66%),
-
-        /* Rocky wall texture */
-        radial-gradient(circle 120px at 5% 40%, rgba(74, 158, 255, 0.06) 0%, transparent 70%),
-        radial-gradient(circle 80px at 15% 60%, rgba(74, 158, 255, 0.04) 0%, transparent 70%),
-        radial-gradient(circle 100px at 90% 30%, rgba(74, 158, 255, 0.05) 0%, transparent 70%),
-
-        /* Main cave gradient */
-        linear-gradient(
-            180deg,
-            #1a1510 0%,
-            #2a2218 15%,
-            #342a1e 30%,
-            #3d3025 50%,
-            #4a3828 70%,
-            #5c4033 85%,
-            #6b4c38 100%
-        );
+    background: url('../images/cave-background.png') no-repeat center center / cover, #1a1510;
 }
 
 /* Crystal decorations */
@@ -232,8 +209,7 @@ button {
 
 .cave-crystals::before,
 .cave-crystals::after {
-    content: '';
-    position: absolute;
+    display: none;
 }
 
 /* Left crystal cluster */
@@ -273,8 +249,270 @@ button {
     align-items: flex-end;
     justify-content: center;
     gap: 1.5rem;
-    max-width: 900px;
+    max-width: 1240px;
     width: 100%;
+}
+
+/* ===== ORE Tally Banner (miner's placard) ===== */
+.ore-tally {
+    position: relative;
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    padding: 0.9rem 2rem;
+}
+.ore-tally--standalone {
+    margin: 1.5rem auto;
+}
+.ore-tally {
+    color: #f3e4c2;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255, 236, 180, 0.03) 0 1px,
+            transparent 1px 3px
+        ),
+        radial-gradient(ellipse at 30% 20%, rgba(255, 200, 110, 0.10), transparent 60%),
+        radial-gradient(ellipse at 80% 90%, rgba(60, 30, 10, 0.55), transparent 55%),
+        linear-gradient(180deg, #2a211a 0%, #1d1712 50%, #14100c 100%);
+    border: 1.5px solid rgba(255, 210, 140, 0.18);
+    border-radius: 3px;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.6) inset,
+        0 14px 28px rgba(0, 0, 0, 0.45),
+        0 2px 0 rgba(0, 0, 0, 0.5);
+    font-family: 'Lora', Georgia, serif;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.ore-tally::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px dashed rgba(255, 210, 140, 0.12);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ore-tally::after {
+    /* faint grain */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 12% 70%, rgba(255, 255, 255, 0.03) 0 1px, transparent 2px),
+        radial-gradient(circle at 55% 22%, rgba(255, 255, 255, 0.025) 0 1px, transparent 2px),
+        radial-gradient(circle at 82% 55%, rgba(0, 0, 0, 0.22) 0 1px, transparent 2px);
+    background-size: 7px 7px, 9px 9px, 11px 11px;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ore-tally-rivet {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #7a6442 0%, #3d3021 55%, #1a130c 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 220, 160, 0.25),
+        0 1px 2px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+.ore-tally-rivet { width: 7px; height: 7px; }
+.ore-tally-rivet--tl { top: 7px; left: 7px; }
+.ore-tally-rivet--tr { top: 7px; right: 7px; }
+.ore-tally-rivet--bl { bottom: 7px; left: 7px; }
+.ore-tally-rivet--br { bottom: 7px; right: 7px; }
+
+.ore-tally-head {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    padding-right: 1.75rem;
+    border-right: 1px solid rgba(255, 210, 140, 0.18);
+}
+
+.ore-tally-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: filter 0.2s;
+}
+.ore-tally-brand:hover { filter: brightness(1.15); }
+
+.ore-tally-brand-mark {
+    display: inline-flex;
+    width: 26px;
+    height: 26px;
+    align-items: center;
+    justify-content: center;
+}
+.ore-tally-brand-mark img {
+    width: 100%;
+    height: 100%;
+    filter:
+        brightness(0) saturate(100%)
+        invert(78%) sepia(45%) saturate(920%) hue-rotate(350deg) brightness(101%) contrast(98%)
+        drop-shadow(0 0 8px rgba(255, 184, 90, 0.55))
+        drop-shadow(0 0 16px rgba(255, 140, 40, 0.25));
+}
+
+.ore-tally-brand-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: #f3e4c2;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.65);
+    line-height: 1;
+}
+.ore-tally-brand-tld {
+    color: #d9a84f;
+    text-shadow: 0 0 10px rgba(217, 168, 79, 0.45);
+}
+
+.ore-tally-grid {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ore-tally-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    line-height: 1;
+}
+
+.ore-tally-nav {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding-left: 1.75rem;
+    border-left: 1px solid rgba(255, 210, 140, 0.18);
+}
+.ore-tally-nav a {
+    position: relative;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #f3e4c2;
+    text-decoration: none;
+    padding: 0.75rem 1.15rem;
+    border: 1.5px solid rgba(255, 210, 140, 0.35);
+    border-radius: 3px;
+    background:
+        linear-gradient(180deg, rgba(255, 210, 140, 0.08) 0%, rgba(255, 210, 140, 0.02) 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 220, 160, 0.18),
+        0 2px 0 rgba(0, 0, 0, 0.5),
+        0 4px 10px rgba(0, 0, 0, 0.35);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+    transition: transform 0.15s ease, color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.ore-tally-nav a:hover {
+    color: #ffe9b5;
+    border-color: rgba(255, 210, 140, 0.6);
+    background:
+        linear-gradient(180deg, rgba(255, 210, 140, 0.18) 0%, rgba(255, 210, 140, 0.06) 100%);
+    transform: translateY(-1px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 220, 160, 0.3),
+        0 3px 0 rgba(0, 0, 0, 0.5),
+        0 6px 14px rgba(0, 0, 0, 0.4),
+        0 0 18px rgba(255, 184, 90, 0.25);
+}
+.ore-tally-nav a:active {
+    transform: translateY(1px);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.45),
+        0 0 0 rgba(0, 0, 0, 0.5);
+}
+.ore-tally-nav a.active {
+    color: #1a1208;
+    border-color: #ffb85a;
+    background:
+        linear-gradient(180deg, #ffd98a 0%, #e69832 100%);
+    text-shadow: 0 1px 0 rgba(255, 230, 180, 0.65);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 220, 0.55),
+        inset 0 -2px 0 rgba(120, 60, 20, 0.35),
+        0 2px 0 rgba(0, 0, 0, 0.5),
+        0 0 22px rgba(255, 184, 90, 0.4);
+}
+
+.ore-tally-stat-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(217, 168, 79, 0.75);
+}
+
+.ore-tally-stat-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.01em;
+    color: #f6ecd1;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+.ore-glyph {
+    width: 1.05em;
+    height: 1.05em;
+    align-self: center;
+    /* Recolor the black SVG to warm lantern amber + add a soft glow */
+    filter:
+        brightness(0) saturate(100%)
+        invert(78%) sepia(45%) saturate(920%) hue-rotate(350deg) brightness(101%) contrast(98%)
+        drop-shadow(0 0 6px rgba(255, 184, 90, 0.55))
+        drop-shadow(0 0 12px rgba(255, 140, 40, 0.22));
+}
+
+@media (max-width: 760px) {
+    .ore-tally {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.85rem;
+        padding: 1rem 1.1rem;
+    }
+    .ore-tally-head {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 210, 140, 0.18);
+        padding: 0 0 0.85rem 0;
+        justify-content: center;
+    }
+    .ore-tally-grid {
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .ore-tally-stat-value { font-size: 1.1rem; }
+    .ore-tally-nav {
+        padding: 0.85rem 0 0;
+        border-left: none;
+        border-top: 1px solid rgba(255, 210, 140, 0.18);
+        justify-content: center;
+        gap: 0.5rem;
+    }
 }
 
 /* ===== Newsstand ===== */
@@ -299,7 +537,7 @@ button {
     border-radius: 8px;
     padding: 0;
     width: 100%;
-    max-width: 720px;
+    max-width: 1040px;
     box-shadow:
         inset 0 2px 4px rgba(255, 255, 255, 0.1),
         0 8px 32px rgba(0, 0, 0, 0.5),
@@ -337,7 +575,7 @@ button {
 
 .shelf-items {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 0.75rem;
     padding: 0 0.5rem;
     min-height: 160px;
@@ -371,7 +609,7 @@ button {
 
 .cd-items {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 0.75rem;
     padding: 0 0.5rem;
     min-height: 120px;
@@ -640,6 +878,165 @@ button {
     color: var(--crystal-blue);
 }
 
+/* ===== "More" tiles ===== */
+/* Magazine archive card — weathered parchment folder */
+.magazine-more .magazine-more-cover {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.75rem;
+    background:
+        repeating-linear-gradient(
+            45deg,
+            rgba(139, 101, 56, 0.08) 0 2px,
+            transparent 2px 7px
+        ),
+        radial-gradient(ellipse at 30% 20%, rgba(255, 236, 180, 0.22), transparent 65%),
+        linear-gradient(160deg, #e8d8af 0%, #c9a978 60%, #9c7a4a 100%);
+    border: 2px dashed rgba(60, 38, 18, 0.55);
+    border-radius: 3px;
+    color: #2a1d0e;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 240, 200, 0.35),
+        inset 0 -4px 10px rgba(60, 30, 10, 0.25),
+        0 4px 12px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+.magazine-more .magazine-more-cover::after {
+    /* Folded corner */
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    background:
+        linear-gradient(225deg, transparent 49%, rgba(60, 30, 10, 0.45) 50%, rgba(120, 80, 40, 0.9) 51%, #6b4a24 100%);
+    box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.35);
+}
+.magazine-more .magazine-more-stack {
+    position: absolute;
+    inset: auto 0 auto 0;
+    top: 18%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+.magazine-more .magazine-more-page {
+    position: relative;
+    display: block;
+    width: 46%;
+    height: 38px;
+    margin: 0 -12%;
+    background:
+        linear-gradient(180deg, #f4e6c2 0%, #d6b684 100%);
+    border: 1.5px solid rgba(60, 38, 18, 0.5);
+    border-radius: 2px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    transform: rotate(-6deg);
+}
+.magazine-more .magazine-more-page:nth-child(2) { transform: rotate(2deg) translateY(-4px); z-index: 2; }
+.magazine-more .magazine-more-page:nth-child(3) { transform: rotate(8deg) translateY(-2px); }
+.magazine-more .magazine-more-eyebrow {
+    position: relative;
+    z-index: 3;
+    margin-top: 3.4rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.42rem;
+    letter-spacing: 0.22em;
+    color: #5c3a1e;
+    text-transform: uppercase;
+}
+.magazine-more .magazine-more-title {
+    position: relative;
+    z-index: 3;
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1e1208;
+    text-shadow: 0 1px 0 rgba(255, 240, 200, 0.45);
+    line-height: 1.05;
+    text-align: center;
+}
+.magazine-more .magazine-more-arrow {
+    position: relative;
+    z-index: 3;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.85rem;
+    color: #8b5a1a;
+    margin-top: 0.15rem;
+    transition: transform 0.3s ease;
+}
+.magazine-more:hover {
+    filter: brightness(1.08);
+}
+.magazine-more:hover .magazine-more-arrow {
+    transform: translateX(4px);
+}
+
+/* Podcast archive — golden "MORE" CD */
+.cd-more .cd-more-disc {
+    background:
+        radial-gradient(circle at 50% 50%,
+            transparent 18px,
+            rgba(0,0,0,0.3) 18px,
+            rgba(0,0,0,0.3) 20px,
+            #ffb85a 20px,
+            #ffb85a 22px,
+            transparent 22px,
+            transparent 24px,
+            rgba(255, 255, 255, 0.12) 24px,
+            rgba(255, 255, 255, 0.12) 25px,
+            transparent 25px),
+        conic-gradient(from 0deg,
+            #d99234 0%,
+            #ffd98a 12%,
+            #ffb85a 25%,
+            #8a5816 40%,
+            #ffd98a 55%,
+            #e69832 70%,
+            #ffb85a 85%,
+            #d99234 100%);
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(255, 184, 90, 0.35);
+}
+.cd-more-label {
+    flex-direction: column;
+    gap: 0.1rem;
+    background:
+        radial-gradient(circle at 30% 25%, #fff4d4 0%, #ffd98a 60%, #e69832 100%) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -2px 4px rgba(120, 60, 20, 0.4);
+}
+.cd-more-plus {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.9rem;
+    color: #5c2e08;
+    line-height: 1;
+    text-shadow: 0 1px 0 rgba(255, 240, 200, 0.6);
+}
+.cd-more-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.42rem;
+    letter-spacing: 0.18em;
+    color: #5c2e08;
+}
+.cd-more:hover .cd-more-disc {
+    animation: cd-more-spin 1.6s linear infinite;
+}
+@keyframes cd-more-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.cd-item.cd-more:hover .cd-disc {
+    transform: none; /* override the 15deg tilt in favor of spin */
+}
+
 /* ===== Donate Chest ===== */
 .donate-rack {
     padding: 0.75rem 1rem 1rem;
@@ -842,13 +1239,13 @@ button {
 
 /* ===== Pixel Miner Character ===== */
 .pixel-miner {
-    width: 96px;
-    height: 128px;
+    width: 480px;
+    height: 510px;
     flex-shrink: 0;
     image-rendering: pixelated;
     position: relative;
     align-self: flex-end;
-    margin-bottom: 1rem;
+    margin-bottom: -10rem;
     background: url('../images/character.png') no-repeat center / contain;
     animation: miner-bob 2s ease-in-out infinite;
 }
