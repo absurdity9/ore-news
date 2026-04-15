@@ -108,19 +108,7 @@ function renderDonate(donate) {
     rack.innerHTML = `
         <div class="donate-chest">
             <div class="donate-gem" aria-hidden="true">
-                <svg viewBox="0 0 32 32" width="44" height="44">
-                    <defs>
-                        <linearGradient id="solGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#9945FF"/>
-                            <stop offset="50%" stop-color="#7A5BFF"/>
-                            <stop offset="100%" stop-color="#14F195"/>
-                        </linearGradient>
-                    </defs>
-                    <polygon points="16,2 28,10 28,22 16,30 4,22 4,10" fill="url(#solGrad)" stroke="#1a0f2e" stroke-width="1.5"/>
-                    <polygon points="16,2 28,10 16,14 4,10" fill="#fff" opacity="0.18"/>
-                    <polygon points="4,10 16,14 16,30 4,22" fill="#000" opacity="0.18"/>
-                    <line x1="16" y1="14" x2="16" y2="30" stroke="#fff" stroke-width="0.6" opacity="0.4"/>
-                </svg>
+                <img src="images/solana-logo.svg" alt="" width="44" height="34">
             </div>
             <div class="donate-body">
                 <div class="donate-eyebrow">
