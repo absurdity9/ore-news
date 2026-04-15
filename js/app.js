@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loadContent();
     }
     setupHamburger();
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+    }
 });
 
 async function loadContent() {

@@ -126,6 +126,17 @@ button {
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: background 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.main-nav a [data-lucide],
+.main-nav a svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    stroke-width: 2;
 }
 
 .main-nav a:hover,
