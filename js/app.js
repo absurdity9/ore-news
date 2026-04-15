@@ -1,7 +1,10 @@
 // OreNews App — loads content.json and renders magazines + CDs
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadContent();
+    // Only load newsstand content on pages that render it
+    if (document.querySelector('#shelf-row-1')) {
+        loadContent();
+    }
     setupHamburger();
 });
 
