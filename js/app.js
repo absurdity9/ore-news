@@ -29,8 +29,8 @@ function renderMagazines(magazines) {
     const row1 = document.querySelector('#shelf-row-1 .shelf-items');
     const row2 = document.querySelector('#shelf-row-2 .shelf-items');
 
-    magazines.slice(0, 6).forEach(mag => row1.appendChild(createMagazineEl(mag)));
-    magazines.slice(6, 11).forEach(mag => row2.appendChild(createMagazineEl(mag)));
+    magazines.slice(0, 5).forEach((mag, i) => row1.appendChild(createMagazineEl(mag, i === 0)));
+    magazines.slice(5, 9).forEach(mag => row2.appendChild(createMagazineEl(mag, false)));
 
     row2.appendChild(createMagazineMoreEl(magazines.length));
 }
@@ -56,14 +56,13 @@ function createMagazineMoreEl(count) {
         </div>
         <div class="magazine-label">
             <span class="magazine-title">All ${count} Dispatches</span>
-            <span class="magazine-cta">(Tap to Browse)</span>
         </div>
     `;
 
     return link;
 }
 
-function createMagazineEl(mag) {
+function createMagazineEl(mag, showCta = false) {
     const link = document.createElement('a');
     link.href = mag.url;
     link.target = '_blank';
@@ -73,17 +72,13 @@ function createMagazineEl(mag) {
 
     link.innerHTML = `
         <div class="magazine-cover" data-theme="${mag.theme}">
-            <div class="cover-masthead">MINESHAFT<br>WEEKLY</div>
             <div class="cover-illustration">
                 ${getCoverSVG(mag.theme)}
-            </div>
-            <div class="cover-footer">
-                <span class="cover-issue">Issue #${mag.issueNumber}</span>
             </div>
         </div>
         <div class="magazine-label">
             <span class="magazine-title">Issue #${mag.issueNumber}: ${mag.title}</span>
-            <span class="magazine-cta">(Tap to Read)</span>
+            ${showCta ? '<span class="magazine-cta">(Tap to Read)</span>' : ''}
         </div>
     `;
 
@@ -93,8 +88,8 @@ function createMagazineEl(mag) {
 function renderCDs(cds) {
     const rack = document.querySelector('#cd-rack .cd-items');
 
-    cds.slice(0, 4).forEach(cd => {
-        rack.appendChild(createCDEl(cd));
+    cds.slice(0, 4).forEach((cd, i) => {
+        rack.appendChild(createCDEl(cd, i === 0));
     });
 
     rack.appendChild(createCDMoreEl(cds.length));
@@ -117,13 +112,12 @@ function createCDMoreEl(count) {
             <div class="cd-hole"></div>
         </div>
         <span class="cd-ep">Full Playlist</span>
-        <span class="cd-cta">(Tap to Play)</span>
     `;
 
     return link;
 }
 
-function createCDEl(cd) {
+function createCDEl(cd, showCta = false) {
     const link = document.createElement('a');
     link.href = cd.url;
     link.target = '_blank';
@@ -145,7 +139,7 @@ function createCDEl(cd) {
             <div class="cd-hole"></div>
         </div>
         <span class="cd-ep">${epLabel}</span>
-        <span class="cd-cta">(Tap to Play)</span>
+        ${showCta ? '<span class="cd-cta">(Tap to Play)</span>' : ''}
     `;
 
     return link;
