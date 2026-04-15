@@ -4,118 +4,15 @@
     "address": "zinnresearch.sol"
   },
   "magazines": [
-    {
-      "id": "issue-14",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 14,
-      "theme": "crystal",
-      "url": "https://x.com/zinnresearch/status/2042692245858717710",
-      "row": 1
-    },
-    {
-      "id": "issue-13",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 13,
-      "theme": "safety",
-      "url": "https://x.com/zinnresearch/status/2040167806336151955",
-      "row": 1
-    },
-    {
-      "id": "issue-12",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 12,
-      "theme": "shovel",
-      "url": "https://x.com/zinnresearch/status/2037642408775602487",
-      "row": 1
-    },
-    {
-      "id": "issue-11",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 11,
-      "theme": "cart",
-      "url": "https://x.com/zinnresearch/status/2035106448188088644",
-      "row": 1
-    },
-    {
-      "id": "issue-10",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 10,
-      "theme": "gem",
-      "url": "https://x.com/zinnresearch/status/2032566458383847550",
-      "row": 1
-    },
-    {
-      "id": "issue-9",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 9,
-      "theme": "tunnel",
-      "url": "https://x.com/zinnresearch/status/2030026967961989286",
-      "row": 1
-    },
-    {
-      "id": "issue-8",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 8,
-      "theme": "lantern",
-      "url": "https://x.com/zinnresearch/status/2027491237448532308",
-      "row": 1
-    },
-    {
-      "id": "issue-7",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 7,
-      "theme": "dynamite",
-      "url": "https://x.com/zinnresearch/status/2024938733288456342",
-      "row": 2
-    },
-    {
-      "id": "issue-6",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 6,
-      "theme": "crystal",
-      "url": "https://x.com/zinnresearch/status/2022404152194928945",
-      "row": 2
-    },
-    {
-      "id": "issue-5",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 5,
-      "theme": "safety",
-      "url": "https://x.com/zinnresearch/status/2019876172998275123",
-      "row": 2
-    },
-    {
-      "id": "issue-4",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 4,
-      "theme": "shovel",
-      "url": "https://x.com/zinnresearch/status/2017332329644278225",
-      "row": 2
-    },
-    {
-      "id": "issue-3",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 3,
-      "theme": "cart",
-      "url": "https://x.com/zinnresearch/status/2014789030886441308",
-      "row": 2
-    },
-    {
-      "id": "issue-2",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 2,
-      "theme": "gem",
-      "url": "https://x.com/zinnresearch/status/2012237627538235564",
-      "row": 2
-    },
-    {
-      "id": "issue-1",
-      "title": "Mineshaft Dispatch",
-      "issueNumber": 1,
-      "theme": "tunnel",
-      "url": "https://x.com/zinnresearch/status/2009691205408309272",
-      "row": 2
-    }
+    { "id": "mw-10-apr", "week": "10 April", "cover": "images/magazines/10-april.png",  "url": "https://x.com/zinnresearch/status/2042692245858717710" },
+    { "id": "mw-3-apr",  "week": "3 April",  "cover": "images/magazines/3-april.jpeg",  "url": "https://x.com/zinnresearch/status/2040167806336151955" },
+    { "id": "mw-27-mar", "week": "27 March", "cover": "images/magazines/27-march.jpeg", "url": "https://x.com/zinnresearch/status/2037642408775602487" },
+    { "id": "mw-20-mar", "week": "20 March", "cover": "images/magazines/20-march.jpeg", "url": "https://x.com/zinnresearch/status/2035106448188088644" },
+    { "id": "mw-13-mar", "week": "13 March", "cover": "images/magazines/13-march.jpeg", "url": "https://x.com/zinnresearch/status/2032566458383847550" },
+    { "id": "mw-6-mar",  "week": "6 March",  "cover": "images/magazines/6-march.jpeg",  "url": "https://x.com/zinnresearch/status/2030026967961989286" },
+    { "id": "mw-27-feb", "week": "27 Feb",   "cover": "images/magazines/27-feb.jpeg",   "url": "https://x.com/zinnresearch/status/2027491237448532308" },
+    { "id": "mw-20-feb", "week": "20 Feb",   "cover": "images/magazines/20-feb.jpeg",   "url": "https://x.com/zinnresearch/status/2024938733288456342" },
+    { "id": "mw-13-feb", "week": "13 Feb",   "cover": "images/magazines/13-feb.jpeg",   "url": "https://x.com/zinnresearch/status/2022404152194928945" }
   ],
   "cds": [
     {

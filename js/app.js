@@ -50,9 +50,10 @@ function createMagazineMoreEl(count) {
                 <span class="magazine-more-page"></span>
                 <span class="magazine-more-page"></span>
             </span>
-            <span class="magazine-more-eyebrow">Mineshaft Archive</span>
-            <span class="magazine-more-title">All Issues</span>
-            <span class="magazine-more-arrow" aria-hidden="true">→</span>
+            <span class="magazine-more-body">
+                <span class="magazine-more-eyebrow">Archive</span>
+                <span class="magazine-more-title">All Issues <span class="magazine-more-arrow" aria-hidden="true">→</span></span>
+            </span>
         </div>
         <div class="magazine-label">
             <span class="magazine-title">All ${count} Dispatches</span>
@@ -68,16 +69,14 @@ function createMagazineEl(mag, showCta = false) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.className = 'magazine-item';
-    link.setAttribute('aria-label', `Issue #${mag.issueNumber}: ${mag.title} (Tap to Read)`);
+    link.setAttribute('aria-label', `Mineshaft Weekly — ${mag.week} (Tap to Read)`);
 
     link.innerHTML = `
-        <div class="magazine-cover" data-theme="${mag.theme}">
-            <div class="cover-illustration">
-                ${getCoverSVG(mag.theme)}
-            </div>
+        <div class="magazine-cover">
+            <img class="magazine-cover-img" src="${mag.cover}" alt="Mineshaft Weekly — ${mag.week}" loading="lazy">
         </div>
         <div class="magazine-label">
-            <span class="magazine-title">Issue #${mag.issueNumber}: ${mag.title}</span>
+            <span class="magazine-title">${mag.week}</span>
             ${showCta ? '<span class="magazine-cta">(Tap to Read)</span>' : ''}
         </div>
     `;
