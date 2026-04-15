@@ -128,7 +128,14 @@ button {
     transition: background 0.2s, color 0.2s;
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.5rem;
+    line-height: 1;
+}
+
+.main-nav a > span {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
 }
 
 .main-nav a [data-lucide],
@@ -137,6 +144,8 @@ button {
     height: 18px;
     flex-shrink: 0;
     stroke-width: 2;
+    display: block;
+    vertical-align: middle;
 }
 
 .main-nav a:hover,
