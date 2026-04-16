@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ore Insiders Podcast Archives — OreNews</title>
-    <meta name="description" content="Browse every Ore Insiders podcast episode — conversations with ORE miners and builders on Solana. Built by Minemore.app.">
+    <title>Search — OreNews</title>
+    <meta name="description" content="Search across Mineshaft Weekly, Ore Insiders, and Minerside podcasts. Coming soon.">
     <meta name="author" content="Zinn Research">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#4a9eff">
-    <link rel="canonical" href="https://orenews.supply/archives-podcasts.html">
+    <link rel="canonical" href="https://orenews.supply/search.html">
 
     <link rel="icon" type="image/png" href="images/character.png">
     <link rel="apple-touch-icon" href="images/character.png">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="OreNews">
-    <meta property="og:url" content="https://orenews.supply/archives-podcasts.html">
-    <meta property="og:title" content="Ore Insiders Podcast Archives — OreNews">
-    <meta property="og:description" content="Browse every Ore Insiders podcast episode — conversations with ORE miners and builders on Solana.">
+    <meta property="og:url" content="https://orenews.supply/search.html">
+    <meta property="og:title" content="Search — OreNews">
+    <meta property="og:description" content="Search across Mineshaft Weekly, Ore Insiders, and Minerside podcasts. Coming soon.">
     <meta property="og:image" content="https://orenews.supply/images/character.png">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@zinnresearch">
-    <meta name="twitter:title" content="Ore Insiders Podcast Archives — OreNews">
-    <meta name="twitter:description" content="Browse every Ore Insiders podcast episode — conversations with ORE miners and builders on Solana.">
+    <meta name="twitter:title" content="Search — OreNews">
+    <meta name="twitter:description" content="Search across Mineshaft Weekly, Ore Insiders, and Minerside podcasts. Coming soon.">
     <meta name="twitter:image" content="https://orenews.supply/images/character.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,7 @@
 </head>
 <body>
     <main class="cave-scene">
-        <h1 class="sr-only">Ore Insiders Podcast Archives — OreNews</h1>
+        <h1 class="sr-only">Search — OreNews</h1>
         <div class="cave-crystals"></div>
         <aside class="ore-tally" role="region" aria-label="ORE supply">
             <span class="ore-tally-rivet ore-tally-rivet--tl" aria-hidden="true"></span>
@@ -58,27 +58,19 @@
             <nav class="ore-tally-nav" aria-label="Primary">
                 <a href="index.html">Home</a>
                 <a href="deep-dive.html">Deep Dive</a>
-                <a href="archives-magazines.html" class="active">Archives</a>
-                <a href="search.html" class="ore-tally-nav-icon" aria-label="Search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
+                <a href="archives-magazines.html">Archives</a>
+                <a href="search.html" class="ore-tally-nav-icon active" aria-label="Search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
             </nav>
         </aside>
         <div class="scene-content">
-            <div class="newsstand">
-                <div class="archive-tabs" role="tablist" aria-label="Archive sections">
-                    <a href="archives-magazines.html" class="archive-tab" role="tab" aria-selected="false">Mineshaft Weekly</a>
-                    <a href="archives-podcasts.html" class="archive-tab active" role="tab" aria-selected="true">Ore Insiders</a>
+            <div class="newsstand" style="text-align:center; padding:3rem 2rem;">
+                <div class="newsstand-plaque" style="margin-bottom:1.5rem;">
+                    <h2>COMING SOON</h2>
                 </div>
-                <div class="archive-grid archive-grid--podcasts" id="archive-grid"></div>
-                <div class="archive-pagination" id="archive-pagination"></div>
-                <noscript>
-                    <ul class="noscript-archives">
-                        <li><a href="https://www.youtube.com/watch?v=wV-oMcOgHMc">Ore Insiders Ep. 1 — Graeme Smith</a></li>
-                        <li><a href="https://www.youtube.com/watch?v=_xsNWpL6G3s">Ore Insiders Ep. 2 — CraggleBear</a></li>
-                        <li><a href="https://www.youtube.com/watch?v=cA7DUbVCSBE">Ore Insiders Ep. 3 — RHBCrypto</a></li>
-                        <li><a href="https://www.youtube.com/watch?v=PC4-yLzwKI0">Ore Insiders Ep. 4 — MadHatter</a></li>
-                    </ul>
-                </noscript>
-                <div class="newsstand-base"></div>
+                <p style="font-family:var(--font-serif); font-size:1.1rem; color:var(--parchment); line-height:1.6; max-width:480px; margin:0 auto;">
+                    Search across Mineshaft Weekly, Ore Insiders, and Minerside podcasts.
+                </p>
+                <div class="newsstand-base" style="margin-top:2rem;"></div>
             </div>
         </div>
     </main>
@@ -86,7 +78,5 @@
     <footer class="site-footer">
         <p>Copyright &copy; 2026 OreNews. All rights reserved. Built by <a href="https://minemore.app" target="_blank" rel="noopener noreferrer" class="minemore-credit"><img src="images/minemore-logo.png" alt="" class="minemore-logo">Minemore.app</a>.</p>
     </footer>
-
-    <script src="js/archives.js"></script>
 </body>
 </html>
