@@ -37,11 +37,9 @@ function renderMagazines(magazines) {
 
 function createMagazineMoreEl(count) {
     const link = document.createElement('a');
-    link.href = 'https://x.com/zinnresearch';
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
+    link.href = 'archives-magazines.html';
     link.className = 'magazine-item magazine-more';
-    link.setAttribute('aria-label', `Browse all ${count} Mineshaft Weekly dispatches on X`);
+    link.setAttribute('aria-label', `Browse all ${count} Mineshaft Weekly dispatches`);
 
     link.innerHTML = `
         <div class="magazine-cover magazine-more-cover">
@@ -89,11 +87,9 @@ function renderCDs(cds) {
 
 function createCDMoreEl(count) {
     const link = document.createElement('a');
-    link.href = 'https://www.youtube.com/playlist?list=PL5b3Yh4V54D09B2TfSEozo2O-BDVT-3Ar';
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
+    link.href = 'archives-podcasts.html';
     link.className = 'cd-item cd-more';
-    link.setAttribute('aria-label', `Browse all ${count} Ore Insiders episodes on YouTube`);
+    link.setAttribute('aria-label', `Browse all ${count} Ore Insiders episodes`);
 
     link.innerHTML = `
         <div class="cd-disc cd-more-disc" aria-hidden="true">
@@ -103,7 +99,7 @@ function createCDMoreEl(count) {
             </div>
             <div class="cd-hole"></div>
         </div>
-        <span class="cd-ep">Full Playlist</span>
+        <span class="cd-ep"></span>
     `;
 
     return link;
@@ -124,7 +120,7 @@ function createCDEl(cd, showCta = false) {
         : `<span class="cd-name">${cd.title}</span>`;
 
     link.innerHTML = `
-        <div class="cd-disc" style="--cd-color: ${cd.color}">
+        <div class="cd-disc" style="--cd-color: #111">
             <div class="cd-label">
                 ${thumb}
             </div>
