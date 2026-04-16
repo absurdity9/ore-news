@@ -50,13 +50,6 @@ function createMagazineMoreEl(count) {
                 <span class="magazine-more-page"></span>
                 <span class="magazine-more-page"></span>
             </span>
-            <span class="magazine-more-body">
-                <span class="magazine-more-eyebrow">Archive</span>
-                <span class="magazine-more-title">All Issues <span class="magazine-more-arrow" aria-hidden="true">→</span></span>
-            </span>
-        </div>
-        <div class="magazine-label">
-            <span class="magazine-title">All ${count} Dispatches</span>
         </div>
     `;
 

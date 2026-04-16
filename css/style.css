@@ -551,7 +551,7 @@ button {
         linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
     border: 3px solid var(--wood-dark);
     border-radius: 4px;
-    margin: 1rem auto 0.5rem;
+    margin: 0.5rem auto 0;
     padding: 0.5rem 1.5rem;
     width: fit-content;
     box-shadow:
@@ -569,7 +569,7 @@ button {
 
 /* Shelf row */
 .shelf {
-    padding: 0.75rem 1rem 0;
+    padding: 0 1rem 0;
     position: relative;
 }
 
@@ -578,7 +578,6 @@ button {
     grid-template-columns: repeat(5, 1fr);
     gap: 0.75rem;
     padding: 0 0.5rem;
-    min-height: 160px;
     align-items: end;
 }
 
@@ -884,9 +883,9 @@ button {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 0.55rem;
+    justify-content: center;
     padding: 0.55rem 0.85rem;
+    max-width: 90px;
     background:
         repeating-linear-gradient(
             45deg,
