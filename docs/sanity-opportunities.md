@@ -1,5 +1,25 @@
 # Sanity CMS — What Else Can We Get Out of It?
 
+| Feature | Status | Effort |
+|---------|--------|--------|
+| Scheduled publishing | Available | — |
+| Revision history | Available | — |
+| GROQ playground | Available | — |
+| Image transformations | Available | — |
+| Search page | Not started | Small |
+| Webhooks | Not started | Small |
+| Real-time preview | Not started | Medium |
+| Studio customization | Not started | Medium |
+| Collaboration | Not started | — |
+| Content lake API | Not started | Medium |
+| Sanity AI Assist | Not started | Small |
+| X/Twitter auto-post | Not started | Medium |
+| Telegram/Discord bots | Not started | Small |
+| RSS feed | Not started | Small |
+| Newsletter (Resend/Mailchimp) | Not started | Medium |
+| Analytics & SEO | Not started | Small |
+| OG image generation | Not started | Medium |
+
 ## Already Available
 
 - **Scheduled publishing** — write articles now, set a future publish date
@@ -29,10 +49,6 @@
 
 ### Newsletter
 - **Resend / Mailchimp / Beehiiv** — webhook on publish → send article as email newsletter (portable text converts to email HTML cleanly)
-
-### Frontend & Hosting
-- **Vercel / Netlify** — webhook triggers static rebuild on publish
-- **GitHub Actions** — webhook → run any automation on publish
 
 ### Analytics & SEO
 - **Google Search Console / Plausible** — track which articles get traffic
