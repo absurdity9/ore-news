@@ -1,30 +1,30 @@
 # Sanity CMS — What Else Can We Get Out of It?
 
-| Feature | Status | Effort |
-|---------|--------|--------|
-| **Already Available** | | |
-| Scheduled publishing | Available | — |
-| Revision history | Available | — |
-| GROQ playground | Available | — |
-| Image transformations | Available | — |
-| **Worth Adding** | | |
-| Search page | Not started | Small |
-| Webhooks | Not started | Small |
-| Real-time preview | Not started | Medium |
-| Studio customization | Not started | Medium |
-| **Down the Road** | | |
-| Collaboration | Not started | — |
-| Content lake API | Not started | Medium |
-| Sanity AI Assist | Not started | Small |
-| **Social Distribution** | | |
-| X/Twitter auto-post | Not started | Medium |
-| Telegram/Discord bots | Not started | Small |
-| RSS feed | Not started | Small |
-| **Newsletter** | | |
-| Newsletter (Resend/Mailchimp) | Not started | Medium |
-| **Analytics & SEO** | | |
-| Analytics & SEO | Not started | Small |
-| OG image generation | Not started | Medium |
+| Feature | Description | Status | Effort |
+|---------|-------------|--------|--------|
+| **Already Available** | | | |
+| Scheduled publishing | Write articles now, set a future publish date | Available | — |
+| Revision history | Every edit is versioned, roll back any document | Available | — |
+| GROQ playground | Vision plugin lets you query data live in the studio | Available | — |
+| Image transformations | CDN resizes, crops, and optimizes images via URL params | Available | — |
+| **Worth Adding** | | | |
+| Search page | GROQ full-text search across articles and transcripts | Not started | Small |
+| Webhooks | Trigger notifications or posts to Discord/Slack on publish | Not started | Small |
+| Real-time preview | See draft changes on the live site before publishing | Not started | Medium |
+| Studio customization | Custom dashboard with recent articles, content stats, publish checklist | Not started | Medium |
+| **Down the Road** | | | |
+| Collaboration | Multiple editors working simultaneously with real-time presence | Not started | — |
+| Content lake API | Build on top of same content (newsletter generator, Telegram bot, RSS) | Not started | Medium |
+| Sanity AI Assist | AI-powered writing assistance in the studio | Not started | Small |
+| **Social Distribution** | | | |
+| X/Twitter auto-post | Webhook on publish → auto-post article title + link via X API | Not started | Medium |
+| Telegram/Discord bots | Webhook → push new articles to community channels | Not started | Small |
+| RSS feed | Generate from a GROQ query for subscribers and aggregators | Not started | Small |
+| **Newsletter** | | | |
+| Newsletter (Resend/Mailchimp) | Webhook on publish → send article as email newsletter | Not started | Medium |
+| **Analytics & SEO** | | | |
+| Analytics & SEO | Track which articles get traffic (Google Search Console / Plausible) | Not started | Small |
+| OG image generation | Auto-generate social preview images from article title + eyebrow | Not started | Medium |
 
 ## Already Available
 
