@@ -2,21 +2,27 @@
 
 | Feature | Status | Effort |
 |---------|--------|--------|
+| **Already Available** | | |
 | Scheduled publishing | Available | — |
 | Revision history | Available | — |
 | GROQ playground | Available | — |
 | Image transformations | Available | — |
+| **Worth Adding** | | |
 | Search page | Not started | Small |
 | Webhooks | Not started | Small |
 | Real-time preview | Not started | Medium |
 | Studio customization | Not started | Medium |
+| **Down the Road** | | |
 | Collaboration | Not started | — |
 | Content lake API | Not started | Medium |
 | Sanity AI Assist | Not started | Small |
+| **Social Distribution** | | |
 | X/Twitter auto-post | Not started | Medium |
 | Telegram/Discord bots | Not started | Small |
 | RSS feed | Not started | Small |
+| **Newsletter** | | |
 | Newsletter (Resend/Mailchimp) | Not started | Medium |
+| **Analytics & SEO** | | |
 | Analytics & SEO | Not started | Small |
 | OG image generation | Not started | Medium |
 
