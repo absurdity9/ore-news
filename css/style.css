@@ -1927,6 +1927,24 @@ button {
     background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
 }
 
+.deep-dive-author {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: #a89878;
+    text-align: center;
+    margin: 0.6rem 0 1.2rem;
+    letter-spacing: 0.03em;
+}
+
+.deep-dive-author a {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.deep-dive-author a:hover {
+    text-decoration: underline;
+}
+
 .deep-dive-intro {
     font-family: var(--font-serif);
     font-size: 1.05rem;

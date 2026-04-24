@@ -1,7 +1,6 @@
-// OreNews App — loads content.json and renders magazines + CDs
+// OreNews App — loads content from Sanity CMS and renders homepage
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Only load newsstand content on pages that render it
     if (document.querySelector('#shelf-row-1')) {
         loadContent();
     }
@@ -13,12 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadContent() {
     try {
-        const response = await fetch('data/content.json');
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        renderMagazines(data.magazines);
-        renderCDs(data.cds);
-        renderDonate(data.donate);
+        const [magazines, cds, author] = await Promise.all([
+            sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) [0...9] { week, url, "cover": cover.asset->url }`),
+            sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) [0...4] { title, episode, color, videoId, url, "thumbnail": thumbnail.asset->url }`),
+            sanityFetch(`*[_type == "author"][0] { name, handle, walletAddress }`),
+        ]);
+
+        renderMagazines(magazines);
+        renderCDs(cds);
+        renderDonate({address: author?.walletAddress || '', network: 'Solana'});
     } catch (err) {
         console.error('Failed to load content:', err);
         showError();

@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template - OreNews</title>
+    <title>Loading... — OreNews</title>
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/character.png">
     <link rel="apple-touch-icon" href="images/character.png">
 
@@ -46,32 +45,16 @@
     <main class="deep-dive">
         <div class="deep-dive-inner">
             <div class="deep-dive-header">
-                <p class="deep-dive-eyebrow">Lorem Ipsum</p>
-                <h1 class="deep-dive-title">Dolor Sit Amet</h1>
-                <p class="deep-dive-subtitle">(consectetur adipiscing elit)</p>
-                <p class="deep-dive-intro">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
-                <p class="deep-dive-intro">
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris.
-                </p>
+                <p class="deep-dive-eyebrow" id="article-eyebrow"></p>
+                <h1 class="deep-dive-title" id="article-title"></h1>
+                <p class="deep-dive-subtitle" id="article-subtitle" style="display:none"></p>
+                <p class="deep-dive-author" id="article-author"></p>
+                <div id="article-intro"></div>
             </div>
 
-            <nav class="deep-dive-toc" aria-label="Content sections">
-                <a href="#s1">1. Suspendisse Potenti</a>
-                <a href="#s2">2. Maecenas Faucibus</a>
-                <a href="#s3">3. Vestibulum Ante</a>
-                <a href="#s4">4. Praesent Blandit</a>
-                <a href="#s5">5. Fusce Dapibus</a>
-                <a href="#s6">6. Cras Mattis</a>
-            </nav>
+            <nav class="deep-dive-toc" aria-label="Content sections" id="article-toc"></nav>
 
-            <section class="deep-dive-content">
-                <h2>Lorem Ipsum Dolor</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula ut dictum pharetra, nisi nunc fringilla magna, in commodo elit erat nec turpis.</p>
-                <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</p>
-            </section>
+            <div id="article-sections"></div>
         </div>
     </main>
 
@@ -79,7 +62,7 @@
         <p>Copyright &copy; 2026 OreNews. All rights reserved. Built by <a href="https://minemore.app" target="_blank" rel="noopener noreferrer" class="minemore-credit"><img src="images/minemore-logo.png" alt="" class="minemore-logo">Minemore.app</a>.</p>
     </footer>
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/sanity.js"></script>
+    <script src="js/article.js"></script>
 </body>
 </html>

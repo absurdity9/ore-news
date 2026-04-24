@@ -1,4 +1,4 @@
-// Archives page — loads content.json, renders paginated magazine/podcast grids
+// Archives page — loads from Sanity CMS, renders paginated magazine/podcast grids
 
 const ITEMS_PER_PAGE = 8;
 
@@ -8,15 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadArchives() {
     try {
-        const response = await fetch('data/content.json');
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-
         const grid = document.getElementById('archive-grid');
         if (!grid) return;
 
         const isMagazines = grid.classList.contains('archive-grid--magazines');
-        const items = isMagazines ? data.magazines : data.cds;
+
+        const items = isMagazines
+            ? await sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) { week, url, "cover": cover.asset->url }`)
+            : await sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) { title, episode, color, videoId, url, "thumbnail": thumbnail.asset->url }`);
 
         const startPage = getPageFromHash();
         renderPage(items, startPage, isMagazines);
@@ -68,7 +67,6 @@ function createMagazineCard(mag) {
         </div>
         <div class="archive-card-body">
             <div class="archive-card-date">${mag.week}</div>
-            ${mag.headline ? `<div class="archive-card-headline">${mag.headline}</div>` : ''}
         </div>
     `;
 
@@ -113,20 +111,16 @@ function renderPagination(currentPage, totalPages) {
 
     let html = '';
 
-    // Prev button
     html += `<a class="archive-page-btn${currentPage === 1 ? ' disabled' : ''}" href="#page=${currentPage - 1}" aria-label="Previous page"${currentPage === 1 ? ' aria-disabled="true"' : ''}>Prev</a>`;
 
-    // Page numbers (desktop)
     html += '<span class="archive-page-numbers">';
     for (let i = 1; i <= totalPages; i++) {
         html += `<a class="archive-page-btn${i === currentPage ? ' active' : ''}" href="#page=${i}" aria-label="Page ${i}">${i}</a>`;
     }
     html += '</span>';
 
-    // Mobile indicator
     html += `<span class="archive-page-mobile">Page ${currentPage} of ${totalPages}</span>`;
 
-    // Next button
     html += `<a class="archive-page-btn${currentPage === totalPages ? ' disabled' : ''}" href="#page=${currentPage + 1}" aria-label="Next page"${currentPage === totalPages ? ' aria-disabled="true"' : ''}>Next</a>`;
 
     container.innerHTML = html;
