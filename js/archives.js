@@ -14,7 +14,7 @@ async function loadArchives() {
         const isMagazines = grid.classList.contains('archive-grid--magazines');
 
         const items = isMagazines
-            ? await sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) { week, url, "cover": cover.asset->url }`)
+            ? await sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) { week, url, "cover": cover.asset->url, "articleSlug": article->slug.current }`)
             : await sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) { title, episode, color, videoId, url, "thumbnail": thumbnail.asset->url }`);
 
         const startPage = getPageFromHash();
@@ -55,9 +55,13 @@ function renderPage(items, page, isMagazines) {
 
 function createMagazineCard(mag) {
     const link = document.createElement('a');
-    link.href = mag.url;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
+    if (mag.articleSlug) {
+        link.href = `article.html?slug=${encodeURIComponent(mag.articleSlug)}`;
+    } else {
+        link.href = mag.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+    }
     link.className = 'archive-card-magazine';
     link.setAttribute('aria-label', `Mineshaft Weekly — ${mag.week}`);
 

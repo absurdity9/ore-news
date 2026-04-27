@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadContent() {
     try {
         const [magazines, cds, author] = await Promise.all([
-            sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) [0...9] { week, url, "cover": cover.asset->url }`),
+            sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) [0...9] { week, url, "cover": cover.asset->url, "articleSlug": article->slug.current }`),
             sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) [0...4] { title, episode, color, videoId, url, "thumbnail": thumbnail.asset->url }`),
             sanityFetch(`*[_type == "author"][0] { name, handle, walletAddress }`),
         ]);
@@ -58,9 +58,13 @@ function createMagazineMoreEl(count) {
 
 function createMagazineEl(mag, showCta = false) {
     const link = document.createElement('a');
-    link.href = mag.url;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
+    if (mag.articleSlug) {
+        link.href = `article.html?slug=${encodeURIComponent(mag.articleSlug)}`;
+    } else {
+        link.href = mag.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+    }
     link.className = 'magazine-item';
     link.setAttribute('aria-label', `Mineshaft Weekly — ${mag.week} (Tap to Read)`);
 

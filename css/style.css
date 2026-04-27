@@ -1875,6 +1875,28 @@ button {
     z-index: 1;
 }
 
+.article-x-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-family: var(--font-pixel);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    text-decoration: none;
+    padding: 0.45em 1em;
+    border: 1px solid rgba(255, 210, 140, 0.3);
+    border-radius: 3px;
+    margin-bottom: 1.25rem;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.article-x-link:hover {
+    color: #fff;
+    border-color: rgba(255, 210, 140, 0.55);
+}
+
 .deep-dive-eyebrow {
     font-family: var(--font-pixel);
     font-size: 0.58rem;
