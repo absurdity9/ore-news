@@ -14,7 +14,7 @@ async function loadArticle(slug) {
         const article = await sanityFetch(
             `*[_type == "article" && slug.current == $slug][0] {
                 title, eyebrow, subtitle, publishedAt, xUrl,
-                "author": author-> { name, handle, xHandle },
+                "author": author-> { name, handle, xHandle, walletAddress },
                 intro,
                 sections[] { heading, date, body },
                 metaDescription, keywords
@@ -110,6 +110,52 @@ async function loadArticle(slug) {
                         ${section.body ? renderPortableText(section.body) : ''}
                     `;
                     sectionsEl.appendChild(sectionEl);
+                }
+            });
+        }
+
+        if (article.author && article.author.walletAddress) {
+            const address = article.author.walletAddress;
+            const tipEl = document.createElement('div');
+            tipEl.className = 'donate-rack article-tip';
+            tipEl.innerHTML = `
+                <div class="donate-chest">
+                    <div class="donate-gem" aria-hidden="true">
+                        <img src="images/solana-logo.svg" alt="" width="44" height="34">
+                    </div>
+                    <div class="donate-body">
+                        <div class="donate-eyebrow">
+                            <span class="donate-hint">Tip the author. Pickaxes, lanterns &amp; cave coffee</span>
+                        </div>
+                        <button type="button" class="donate-tablet" aria-label="Copy wallet address">
+                            <code class="donate-address">${escapeHtml(address)}</code>
+                            <span class="donate-copy-icon" aria-hidden="true">
+                                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="3" width="8" height="10" rx="1"/>
+                                    <path d="M5.5 3V2.5a1 1 0 011-1h6a1 1 0 011 1v8a1 1 0 01-1 1H13"/>
+                                </svg>
+                            </span>
+                            <span class="donate-copy-feedback" aria-live="polite"></span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            sectionsEl.appendChild(tipEl);
+
+            const btn = tipEl.querySelector('.donate-tablet');
+            const feedback = tipEl.querySelector('.donate-copy-feedback');
+            btn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(address);
+                    feedback.textContent = 'COPIED';
+                    btn.classList.add('is-copied');
+                    setTimeout(() => {
+                        feedback.textContent = '';
+                        btn.classList.remove('is-copied');
+                    }, 1600);
+                } catch {
+                    feedback.textContent = 'COPY FAILED';
+                    setTimeout(() => { feedback.textContent = ''; }, 1600);
                 }
             });
         }

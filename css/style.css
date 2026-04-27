@@ -1897,6 +1897,12 @@ button {
     border-color: rgba(255, 210, 140, 0.55);
 }
 
+.article-tip {
+    margin-top: 3rem;
+    padding: 0;
+    border-top: none;
+}
+
 .deep-dive-eyebrow {
     font-family: var(--font-pixel);
     font-size: 0.58rem;
