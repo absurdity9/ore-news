@@ -33,6 +33,13 @@ export const magazine = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'article',
+      title: 'Article',
+      type: 'reference',
+      to: [{type: 'article'}],
+      description: 'The dedicated article page for this issue',
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published At',
       type: 'date',

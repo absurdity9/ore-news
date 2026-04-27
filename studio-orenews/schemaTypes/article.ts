@@ -107,6 +107,12 @@ export const article = defineType({
       ],
     }),
     defineField({
+      name: 'xUrl',
+      title: 'X Post URL',
+      type: 'url',
+      description: 'Link to the corresponding X / Twitter post',
+    }),
+    defineField({
       name: 'metaDescription',
       title: 'Meta Description',
       type: 'text',
