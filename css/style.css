@@ -461,7 +461,7 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.45rem;
+    gap: 0.5rem;
 }
 
 .ore-tally-stat-label {
@@ -1643,8 +1643,7 @@ button {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0;
-        align-self: stretch;
+        gap: 0.35rem;
     }
 
     .ore-tally-nav .ore-tally-nav-icon svg {
