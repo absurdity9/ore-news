@@ -1903,6 +1903,45 @@ button {
     border-top: none;
 }
 
+.article-author-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 0.3rem;
+    image-rendering: pixelated;
+    border: 1.5px solid rgba(255, 210, 140, 0.3);
+}
+
+.article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 210, 140, 0.12);
+}
+
+.article-tags-label {
+    font-family: var(--font-pixel);
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-right: 0.25rem;
+}
+
+.article-tag {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: #d4c4a0;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(255, 210, 140, 0.2);
+    border-radius: 3px;
+    background: rgba(255, 210, 140, 0.05);
+}
+
 .deep-dive-eyebrow {
     font-family: var(--font-pixel);
     font-size: 0.58rem;

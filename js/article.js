@@ -1,7 +1,8 @@
 // Article page — fetches a single article from Sanity by slug and renders it
 
 document.addEventListener('DOMContentLoaded', () => {
-    const slug = new URLSearchParams(location.search).get('slug');
+    const slug = new URLSearchParams(location.search).get('slug')
+        || document.body.dataset.slug;
     if (!slug) {
         document.getElementById('article-title').textContent = 'Article not found';
         return;
@@ -9,15 +10,27 @@ document.addEventListener('DOMContentLoaded', () => {
     loadArticle(slug);
 });
 
+function setMeta(attr, name, content) {
+    let el = document.querySelector(`meta[${attr}="${name}"]`);
+    if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attr, name);
+        document.head.appendChild(el);
+    }
+    el.setAttribute('content', content);
+}
+
 async function loadArticle(slug) {
     try {
         const article = await sanityFetch(
             `*[_type == "article" && slug.current == $slug][0] {
                 title, eyebrow, subtitle, publishedAt, xUrl,
                 "author": author-> { name, handle, xHandle, walletAddress },
+                "tags": tags[]-> { title, "slug": slug.current },
                 intro,
                 sections[] { heading, date, body },
-                metaDescription, keywords
+                metaDescription, keywords,
+                "ogImageRef": ogImage.asset._ref
             }`,
             {slug}
         );
@@ -28,6 +41,24 @@ async function loadArticle(slug) {
         }
 
         document.title = `${article.title} — OreNews`;
+
+        if (article.metaDescription) {
+            setMeta('name', 'description', article.metaDescription);
+            setMeta('property', 'og:description', article.metaDescription);
+            setMeta('name', 'twitter:description', article.metaDescription);
+        }
+        setMeta('property', 'og:title', `${article.title} — OreNews`);
+        setMeta('property', 'og:type', 'article');
+        setMeta('name', 'twitter:card', 'summary_large_image');
+        setMeta('name', 'twitter:title', `${article.title} — OreNews`);
+        if (article.keywords && article.keywords.length) {
+            setMeta('name', 'keywords', article.keywords.join(', '));
+        }
+        if (article.ogImageRef) {
+            const ogUrl = sanityImageUrl(article.ogImageRef, 1200);
+            setMeta('property', 'og:image', ogUrl);
+            setMeta('name', 'twitter:image', ogUrl);
+        }
 
         if (article.xUrl) {
             const xLinkEl = document.createElement('a');
@@ -55,7 +86,7 @@ async function loadArticle(slug) {
             const xUrl = article.author.xHandle
                 ? `https://x.com/${article.author.xHandle.replace('@', '')}`
                 : '#';
-            authorEl.innerHTML = `by <a href="${xUrl}" target="_blank" rel="noopener noreferrer">${article.author.handle || article.author.name}</a>`;
+            authorEl.innerHTML = `<img class="article-author-avatar" src="images/character.png" alt="" width="28" height="28"> by <a href="${xUrl}" target="_blank" rel="noopener noreferrer">${article.author.handle || article.author.name}</a>`;
         }
 
         const introEl = document.getElementById('article-intro');
@@ -158,6 +189,14 @@ async function loadArticle(slug) {
                     setTimeout(() => { feedback.textContent = ''; }, 1600);
                 }
             });
+        }
+
+        if (article.tags && article.tags.length) {
+            const tagsEl = document.createElement('div');
+            tagsEl.className = 'article-tags';
+            tagsEl.innerHTML = `<span class="article-tags-label">Tags</span>` +
+                article.tags.map(t => `<span class="article-tag">${escapeHtml(t.title)}</span>`).join('');
+            sectionsEl.appendChild(tagsEl);
         }
     } catch (err) {
         console.error('Failed to load article:', err);
