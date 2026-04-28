@@ -14,7 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function runSearch(query) {
-        resultsEl.innerHTML = '<p class="search-status">Searching…</p>';
+        resultsEl.innerHTML =
+            '<div class="search-loading">' +
+                '<span class="search-loading-text">Searching</span>' +
+                '<span class="search-loading-dots"><span></span><span></span><span></span></span>' +
+            '</div>';
         try {
             const [articles, podcasts] = await Promise.all([
                 searchArticles(query),
@@ -26,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             render(merged, query);
         } catch (err) {
             console.error('Search failed:', err);
-            resultsEl.innerHTML = '<p class="search-status">Search failed — please try again.</p>';
+            resultsEl.innerHTML = `<p class="search-status">Search failed: ${escapeHtml(err.message)}</p>`;
         }
     }
 
@@ -52,14 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function render(results, query) {
         if (results.length === 0) {
-            resultsEl.innerHTML = `<p class="search-status">No results for "${escapeHtml(query)}"</p>`;
+            resultsEl.innerHTML = `<p class="search-status">No results for “${escapeHtml(query)}”</p>`;
             return;
         }
-        resultsEl.innerHTML = `<p class="search-count">${results.length} result${results.length === 1 ? '' : 's'}</p>` +
-            results.map(r => renderCard(r)).join('');
+        resultsEl.innerHTML =
+            `<p class="search-count">${results.length} result${results.length === 1 ? '' : 's'}</p>` +
+            results.map((r, i) => renderCard(r, i)).join('');
     }
 
-    function renderCard(item) {
+    function renderCard(item, index) {
         const isArticle = item._type === 'article';
         const badge = isArticle ? 'Article' : 'Podcast';
         const badgeClass = isArticle ? 'search-badge--article' : 'search-badge--podcast';
@@ -69,8 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const target = isArticle ? '' : ' target="_blank" rel="noopener noreferrer"';
         const date = formatDate(item.publishedAt);
         const snippet = truncate(item.snippet || '', 120);
+        const delay = Math.min(index * 60, 400);
 
-        return `<a class="search-card" href="${href}"${target}>
+        return `<a class="search-card" href="${href}"${target} style="animation-delay:${delay}ms">
             <span class="search-badge ${badgeClass}">${badge}</span>
             <span class="search-card-body">
                 <span class="search-card-title">${escapeHtml(item.title)}</span>
