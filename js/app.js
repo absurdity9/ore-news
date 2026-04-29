@@ -14,7 +14,7 @@ async function loadContent() {
     try {
         const [magazines, cds, author] = await Promise.all([
             sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) [0...9] { week, url, "cover": cover.asset->url, "articleSlug": article->slug.current }`),
-            sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) [0...4] { title, episode, color, videoId, url, "thumbnail": thumbnail.asset->url }`),
+            sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) [0...4] { title, episode, color, videoId, url, "slug": slug.current, "thumbnail": thumbnail.asset->url }`),
             sanityFetch(`*[_type == "author"][0] { name, handle, walletAddress }`),
         ]);
 
@@ -113,9 +113,13 @@ function createCDMoreEl(count) {
 
 function createCDEl(cd, showCta = false) {
     const link = document.createElement('a');
-    link.href = cd.url;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
+    if (cd.slug) {
+        link.href = `podcast.html?slug=${encodeURIComponent(cd.slug)}`;
+    } else {
+        link.href = cd.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+    }
     link.className = 'cd-item';
     const ariaPrefix = cd.episode ? `Ore Insiders Ep. ${cd.episode}: ` : '';
     link.setAttribute('aria-label', `${ariaPrefix}${cd.title} (Tap to Play)`);
