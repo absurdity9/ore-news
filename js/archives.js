@@ -15,7 +15,7 @@ async function loadArchives() {
 
         const items = isMagazines
             ? await sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) { week, url, "cover": cover.asset->url, "articleSlug": article->slug.current }`)
-            : await sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) { title, episode, color, videoId, url, "thumbnail": thumbnail.asset->url }`);
+            : await sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) { title, episode, color, videoId, url, "slug": slug.current, "thumbnail": thumbnail.asset->url }`);
 
         const startPage = getPageFromHash();
         renderPage(items, startPage, isMagazines);
@@ -79,9 +79,13 @@ function createMagazineCard(mag) {
 
 function createPodcastCard(cd) {
     const link = document.createElement('a');
-    link.href = cd.url;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
+    if (cd.slug) {
+        link.href = `podcast.html?slug=${encodeURIComponent(cd.slug)}`;
+    } else {
+        link.href = cd.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+    }
     link.className = 'archive-card-podcast';
     link.setAttribute('aria-label', `Ore Insiders Ep. ${cd.episode}: ${cd.title}`);
 
@@ -99,7 +103,7 @@ function createPodcastCard(cd) {
         <div class="archive-card-info">
             <span class="archive-card-eyebrow">ORE INSIDERS</span>
             <span class="archive-card-title">${cd.title}</span>
-            <span class="archive-card-link">YouTube →</span>
+            <span class="archive-card-link">${cd.slug ? 'Listen →' : 'YouTube →'}</span>
         </div>
     `;
 
