@@ -56,11 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
             `*[_type == "podcast" && (
                 title match $q ||
                 description match $q ||
-                pt::text(transcript) match $q
+                sections[].heading match $q ||
+                pt::text(sections[].body) match $q
             )] | order(publishedAt desc) {
                 _type, title, description, episode, show, url, publishedAt,
+                "slug": slug.current,
                 "fallbackSnippet": description,
-                "bodyText": coalesce(pt::text(transcript), "")
+                "bodyText": coalesce(pt::text(sections[].body), "")
             }`,
             { q: q + '*' }
         );
@@ -80,10 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const isArticle = item._type === 'article';
         const badge = isArticle ? 'Article' : 'Podcast';
         const badgeClass = isArticle ? 'search-badge--article' : 'search-badge--podcast';
-        const href = isArticle
-            ? `article.html?slug=${encodeURIComponent(item.slug)}`
-            : item.url || '#';
-        const target = isArticle ? '' : ' target="_blank" rel="noopener noreferrer"';
+        const internalHref = isArticle
+            ? (item.slug ? `article.html?slug=${encodeURIComponent(item.slug)}` : null)
+            : (item.slug ? `podcast.html?slug=${encodeURIComponent(item.slug)}` : null);
+        const href = internalHref || item.url || '#';
+        const target = internalHref ? '' : ' target="_blank" rel="noopener noreferrer"';
         const date = formatDate(item.publishedAt);
         const snippet = extractSnippet(item, query);
         const delay = Math.min(index * 60, 400);
