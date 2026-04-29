@@ -12,6 +12,13 @@ export const podcast = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {source: 'title'},
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'episode',
       title: 'Episode Number',
       type: 'number',
@@ -44,10 +51,47 @@ export const podcast = defineType({
       of: [{type: 'reference', to: [{type: 'tag'}]}],
     }),
     defineField({
-      name: 'transcript',
-      title: 'Transcript',
+      name: 'sections',
+      title: 'Transcript Sections',
       type: 'array',
-      of: [defineArrayMember({type: 'block'})],
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'section',
+          title: 'Section',
+          fields: [
+            defineField({
+              name: 'heading',
+              title: 'Heading',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'timestamp',
+              title: 'Timestamp (seconds)',
+              type: 'number',
+              description: 'Seconds offset into the YouTube video for this section. Optional — leave blank to disable seek (TOC link will still scroll).',
+              validation: (rule) => rule.min(0).integer(),
+            }),
+            defineField({
+              name: 'body',
+              title: 'Body',
+              type: 'array',
+              of: [defineArrayMember({type: 'block'})],
+            }),
+          ],
+          preview: {
+            select: {title: 'heading', timestamp: 'timestamp'},
+            prepare({title, timestamp}) {
+              const sub =
+                typeof timestamp === 'number'
+                  ? formatTimestamp(timestamp)
+                  : '—'
+              return {title, subtitle: sub}
+            },
+          },
+        }),
+      ],
     }),
     defineField({
       name: 'color',
@@ -91,3 +135,11 @@ export const podcast = defineType({
     },
   },
 })
+
+function formatTimestamp(total: number): string {
+  const h = Math.floor(total / 3600)
+  const m = Math.floor((total % 3600) / 60)
+  const s = total % 60
+  const pad = (n: number) => n.toString().padStart(2, '0')
+  return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`
+}
