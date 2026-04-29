@@ -44,6 +44,9 @@ async function loadPodcast(slug) {
         renderEmbed(podcast.videoId, podcast.url);
         renderTOC(podcast.sections);
         renderSections(podcast.sections);
+
+        attachTOCSeek();
+        initYouTubeAPI();
     } catch (err) {
         console.error('Failed to load podcast:', err);
         document.getElementById('podcast-title').textContent = 'Failed to load podcast';
@@ -121,4 +124,52 @@ function formatTimestamp(total) {
     const s = t % 60;
     const pad = (n) => n.toString().padStart(2, '0');
     return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
+}
+
+let ytPlayer = null;
+let ytPlayerReady = false;
+
+function initYouTubeAPI() {
+    const iframe = document.getElementById('podcast-iframe');
+    if (!iframe) return;
+    if (window.YT && window.YT.Player) {
+        createPlayer(iframe);
+        return;
+    }
+    window.onYouTubeIframeAPIReady = () => createPlayer(iframe);
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+}
+
+function createPlayer(iframe) {
+    ytPlayer = new YT.Player(iframe, {
+        events: {
+            onReady: () => { ytPlayerReady = true; },
+        },
+    });
+}
+
+function attachTOCSeek() {
+    const tocEl = document.getElementById('podcast-toc');
+    if (!tocEl) return;
+    tocEl.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        const seconds = link.dataset.seconds;
+        const id = (link.getAttribute('href') || '').replace(/^#/, '');
+        const target = id ? document.getElementById(id) : null;
+        if (target) {
+            e.preventDefault();
+            history.replaceState(null, '', `#${id}`);
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        if (seconds && ytPlayer && ytPlayerReady) {
+            const n = Number(seconds);
+            if (!Number.isNaN(n)) {
+                ytPlayer.seekTo(n, true);
+                ytPlayer.playVideo();
+            }
+        }
+    });
 }
