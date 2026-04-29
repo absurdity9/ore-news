@@ -2914,19 +2914,28 @@ button {
 /* ===== Podcast page ===== */
 
 .podcast-embed {
+    display: block;
+    width: 100%;
     margin: 1.5rem 0 2rem;
 }
 
 .podcast-embed-frame {
     position: relative;
+    display: block;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 — bulletproof against YT iframe sizing */
     background: #000;
     border: 2px solid var(--gold, #f0c94d);
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.6) inset,
+        0 6px 0 rgba(0, 0, 0, 0.45),
+        0 18px 38px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
 
 .podcast-embed-frame iframe {
+    display: block;
     position: absolute;
     inset: 0;
     width: 100%;
@@ -2936,9 +2945,11 @@ button {
 
 .podcast-watch-link {
     display: inline-block;
-    margin-top: 0.6rem;
+    margin-top: 0.7rem;
     font-family: var(--font-pixel);
     font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: var(--gold, #f0c94d);
     text-decoration: none;
     border-bottom: 1px dotted currentColor;
@@ -2953,9 +2964,33 @@ button {
     min-width: 4ch;
     margin-right: 0.5em;
     font-variant-numeric: tabular-nums;
-    opacity: 0.75;
+    opacity: 0.78;
+}
+
+.podcast-toc-hint {
+    grid-column: 1 / -1;
+    margin: 0 0 1.4rem;
+    padding-bottom: 1.2rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+    color: rgba(212, 196, 160, 0.72);
+    border-bottom: 1px dashed rgba(212, 168, 67, 0.22);
+}
+
+.podcast-toc-hint::before,
+.podcast-toc-hint::after {
+    content: '✦';
+    display: inline-block;
+    margin: 0 0.7em;
+    font-style: normal;
+    color: rgba(240, 201, 77, 0.55);
+    font-size: 0.72em;
+    transform: translateY(-1px);
 }
 
 .podcast-section h2 {
-    scroll-margin-top: 1.5rem;
+    scroll-margin-top: 80px;
 }

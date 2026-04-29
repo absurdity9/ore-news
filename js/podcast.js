@@ -82,6 +82,10 @@ function renderTOC(sections) {
         tocEl.style.display = 'none';
         return;
     }
+    const hint = document.createElement('p');
+    hint.className = 'podcast-toc-hint';
+    hint.textContent = 'Click any chapter to jump the video to that moment.';
+    tocEl.appendChild(hint);
     sections.forEach((section, i) => {
         const id = `s${i + 1}`;
         const link = document.createElement('a');
