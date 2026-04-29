@@ -31,11 +31,12 @@ Add the following fields to the `podcast` document type:
 - **`sections`** — array of `section` objects. Each `section` has:
   - `heading` — string, required. Displayed as the section's `<h2>` and TOC
     label.
-  - `timestamp` — string, required. Format `mm:ss` or `hh:mm:ss`. Validated by
-    a regex `/^(\d+:)?\d{1,2}:\d{2}$/`. Used to seek the YouTube player.
+  - `timestamp` — number (seconds), optional. Used to seek the YouTube player.
+    Editor-friendly preview formats as `mm:ss` / `hh:mm:ss`. When absent, the
+    TOC link still scrolls to the section but does not seek the video.
   - `body` — Portable Text array (`block` only — no images for now to keep
     transcript rendering simple).
-  - Preview shows `heading` as title and `timestamp` as subtitle.
+  - Preview shows `heading` as title and the formatted timestamp as subtitle.
 
 Remove the existing flat `transcript` Portable Text field. There is no
 production data in it; deleting cleanly avoids carrying a deprecated field.
@@ -54,6 +55,24 @@ The script follows the pattern of existing scripts in that directory and uses
 The backfill does NOT populate `sections` — those remain empty until an editor
 fills them in. The page handles empty `sections` gracefully (renders just the
 video and description, no TOC).
+
+### Seed content for Ore Insiders Ep. 2 (Craggle Bear)
+
+A second one-off script `studio-orenews/scripts/seed-cragglebear-transcript.ts`
+parses the markdown at `~/Downloads/cragglebear_transcript.md` (or a copy
+checked into `studio-orenews/scripts/data/`) into 21 sections. Each `##`
+heading becomes a section heading; the paragraphs beneath it become the
+section's Portable Text body (each `**Speaker:** body` paragraph becomes one
+block).
+
+Section timestamps are taken from the chat clip definitions provided by the
+editor, mapped to the markdown headings as detailed in the implementation
+plan. Sections without a precise clip match leave `timestamp` unset (TOC link
+scrolls but does not seek).
+
+The script patches the existing `podcast` document for `show == "ore-insiders"
+&& episode == 2`, adding/replacing `sections`. It does not modify other fields
+on that document.
 
 ## Page (`podcast.html`)
 
@@ -102,17 +121,17 @@ The page reuses the article CSS where possible (`.deep-dive`, `.deep-dive-toc`,
    instantiate `new YT.Player(iframeEl, { events: { onReady } })`.
 6. TOC click handler:
    - `e.preventDefault()`.
-   - Parse `data-seconds` from the link.
-   - If the player is ready, call `player.seekTo(seconds, true)` and
-     `player.playVideo()`.
-   - Smooth-scroll the target section into view.
+   - If `data-seconds` is present and the player is ready, call
+     `player.seekTo(seconds, true)` and `player.playVideo()`.
+   - Smooth-scroll the target section into view (always, regardless of
+     timestamp presence).
    - Update `location.hash` to `#s{i}` for shareability.
 7. Fallback: if the API fails to load, the click handler still scrolls; the
    embed remains usable as a normal video. The `aria-label` on each TOC link
    includes the timestamp for accessibility.
 
-`parseTimestamp(str)` helper: splits on `:`, supports `mm:ss` and `hh:mm:ss`,
-returns total seconds.
+`formatTimestamp(seconds)` helper: returns `mm:ss` for under 1 hour,
+`hh:mm:ss` otherwise, used for both the TOC display and Sanity preview.
 
 ## Linking changes
 
@@ -153,6 +172,8 @@ plan for this spec.
 
 - `studio-orenews/schemaTypes/podcast.ts` (schema)
 - `studio-orenews/scripts/backfill-podcast-slugs.ts` (new)
+- `studio-orenews/scripts/seed-cragglebear-transcript.ts` (new)
+- `studio-orenews/scripts/data/cragglebear_transcript.md` (new — checked-in copy)
 - `podcast.html` (new)
 - `js/podcast.js` (new)
 - `css/style.css` (new podcast-specific styles)
