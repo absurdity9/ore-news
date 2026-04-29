@@ -36,9 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function searchArticles(q) {
         return sanityFetch(
-            `*[_type == "article" && (title match $q || subtitle match $q || sections[].heading match $q)] | order(publishedAt desc) {
+            `*[_type == "article" && (
+                title match $q ||
+                subtitle match $q ||
+                sections[].heading match $q ||
+                pt::text(intro) match $q ||
+                pt::text(sections[].body) match $q
+            )] | order(publishedAt desc) {
                 _type, title, subtitle, "slug": slug.current, publishedAt,
-                "snippet": coalesce(subtitle, sections[0].heading)
+                "fallbackSnippet": coalesce(subtitle, sections[0].heading),
+                "bodyText": coalesce(pt::text(intro), "") + " " + coalesce(pt::text(sections[].body), "")
             }`,
             { q: q + '*' }
         );
@@ -46,9 +53,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function searchPodcasts(q) {
         return sanityFetch(
-            `*[_type == "podcast" && (title match $q || description match $q)] | order(publishedAt desc) {
+            `*[_type == "podcast" && (
+                title match $q ||
+                description match $q ||
+                pt::text(transcript) match $q
+            )] | order(publishedAt desc) {
                 _type, title, description, episode, show, url, publishedAt,
-                "snippet": description
+                "fallbackSnippet": description,
+                "bodyText": coalesce(pt::text(transcript), "")
             }`,
             { q: q + '*' }
         );
@@ -61,10 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         resultsEl.innerHTML =
             `<p class="search-count">${results.length} result${results.length === 1 ? '' : 's'}</p>` +
-            results.map((r, i) => renderCard(r, i)).join('');
+            results.map((r, i) => renderCard(r, i, query)).join('');
     }
 
-    function renderCard(item, index) {
+    function renderCard(item, index, query) {
         const isArticle = item._type === 'article';
         const badge = isArticle ? 'Article' : 'Podcast';
         const badgeClass = isArticle ? 'search-badge--article' : 'search-badge--podcast';
@@ -73,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             : item.url || '#';
         const target = isArticle ? '' : ' target="_blank" rel="noopener noreferrer"';
         const date = formatDate(item.publishedAt);
-        const snippet = truncate(item.snippet || '', 120);
+        const snippet = extractSnippet(item, query);
         const delay = Math.min(index * 60, 400);
 
         return `<a class="search-card" href="${href}"${target} style="animation-delay:${delay}ms">
@@ -95,5 +107,39 @@ document.addEventListener('DOMContentLoaded', () => {
     function truncate(str, max) {
         if (str.length <= max) return str;
         return str.slice(0, max).replace(/\s+\S*$/, '') + '…';
+    }
+
+    function extractSnippet(item, query) {
+        const haystack = [item.title, item.subtitle || item.description, item.bodyText]
+            .filter(Boolean)
+            .join('. ')
+            .replace(/\s+/g, ' ')
+            .trim();
+        const sentence = findSentenceWithQuery(haystack, query);
+        if (sentence) {
+            return sentence.length <= 200 ? sentence : windowAround(sentence, query);
+        }
+        return truncate(item.fallbackSnippet || '', 160);
+    }
+
+    function findSentenceWithQuery(text, query) {
+        const sentences = text.match(/[^.!?]+[.!?]+(?:\s|$)|[^.!?]+$/g);
+        if (!sentences) return null;
+        const q = query.toLowerCase();
+        for (const s of sentences) {
+            if (s.toLowerCase().includes(q)) return s.trim();
+        }
+        return null;
+    }
+
+    function windowAround(text, query) {
+        const idx = text.toLowerCase().indexOf(query.toLowerCase());
+        if (idx === -1) return truncate(text, 200);
+        const start = Math.max(0, idx - 60);
+        const end = Math.min(text.length, idx + query.length + 120);
+        let out = text.slice(start, end);
+        if (start > 0) out = '…' + out.replace(/^\S*\s+/, '').trim();
+        if (end < text.length) out = out.replace(/\s+\S*$/, '') + '…';
+        return out.trim();
     }
 });
