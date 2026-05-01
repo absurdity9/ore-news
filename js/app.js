@@ -121,8 +121,9 @@ function createCDEl(cd, showCta = false) {
     link.setAttribute('aria-label', `${ariaPrefix}${cd.title} (Tap to Play)`);
 
     const epLabel = cd.episode ? `Ep. ${cd.episode}` : cd.title;
-    const thumb = cd.thumbnail
-        ? `<img class="cd-thumb" src="${cd.thumbnail}" alt="" loading="lazy" />`
+    const thumbUrl = cd.thumbnail || (cd.videoId ? `https://img.youtube.com/vi/${cd.videoId}/maxresdefault.jpg` : null);
+    const thumb = thumbUrl
+        ? `<img class="cd-thumb" src="${thumbUrl}" alt="" loading="lazy" />`
         : `<span class="cd-name">${cd.title}</span>`;
 
     link.innerHTML = `
