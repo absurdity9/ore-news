@@ -14,7 +14,7 @@ async function loadContent() {
     try {
         const [magazines, cds, author] = await Promise.all([
             sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) [0...9] { week, url, "cover": cover.asset->url, "articleSlug": article->slug.current }`),
-            sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) [0...4] { title, episode, color, videoId, url, "slug": slug.current, "thumbnail": thumbnail.asset->url }`),
+            sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode desc) [0...4] { title, episode, color, videoId, url, "slug": slug.current, "thumbnail": thumbnail.asset->url }`),
             sanityFetch(`*[_type == "author"][0] { name, handle, walletAddress }`),
         ]);
 
