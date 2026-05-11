@@ -89,8 +89,9 @@ function createPodcastCard(cd) {
     link.className = 'archive-card-podcast';
     link.setAttribute('aria-label', `Ore Insiders Ep. ${cd.episode}: ${cd.title}`);
 
-    const thumb = cd.thumbnail
-        ? `<img class="archive-card-thumb" src="${cd.thumbnail}" alt="" loading="lazy">`
+    const thumbUrl = cd.thumbnail || (cd.videoId ? `https://img.youtube.com/vi/${cd.videoId}/maxresdefault.jpg` : null);
+    const thumb = thumbUrl
+        ? `<img class="archive-card-thumb" src="${thumbUrl}" alt="" loading="lazy">`
         : '';
 
     link.innerHTML = `
