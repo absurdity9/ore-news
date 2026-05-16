@@ -1248,7 +1248,7 @@ button {
     image-rendering: pixelated;
     position: relative;
     align-self: flex-end;
-    margin-bottom: -8rem;
+    margin-bottom: -4rem;
     background: url('../images/character.png') no-repeat center / contain;
     animation: miner-bob 2s ease-in-out infinite;
 }
