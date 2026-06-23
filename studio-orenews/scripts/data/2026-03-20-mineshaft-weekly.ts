@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly — Leaderboard shows top strategies',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'DDoS & Governance',
   publishedAt: '2026-03-20T00:00:00Z',
+  xUrl: 'https://x.com/zinnresearch',
   intro: [
     'This week contained a thought provoking article on the Ore protocol, a partnership with a tax accounting service, an update of holder analysis by HHC and much more. At the time of writing, @HardhatChad asked the community whether he should drop another idea thread, meaning we have something big to look forward to next week.',
     'In addition to this, at the end of this article, I introduce a new section in the MineShaft Weekly titled \'\'How to Mine mORE\'\' using strategies from the MineMore auto miner Leaderboard to help you readers get more Ore for your Sol.',
@@ -75,11 +76,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 20 March',
-  week: '20 March',
-  publishedAt: '2026-03-20',
-  url: 'https://x.com/zinnresearch',
-}
-
-importArticle(article, magazine)
+importArticle(article)

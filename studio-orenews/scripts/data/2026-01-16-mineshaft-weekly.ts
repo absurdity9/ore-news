@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly II — Ore\'s Chat is back',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'Ore\'s Chat is back',
   publishedAt: '2026-01-16T00:00:00Z',
+  xUrl: 'https://x.com/zinnresearch',
   intro: [
     'Another strong week of 6 figure revenue days and building by the community occurred in the mines.',
     'This week I\'m introducing a new section of the weekly update called Miner of the Week, to pay respect to those who are helping the team and others in the mines. If you are active in the Discord, this first week\'s winner is no surprise to you!',
@@ -63,11 +64,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 16 January',
-  week: '16 January',
-  publishedAt: '2026-01-16',
-  url: 'https://x.com/zinnresearch',
-}
-
-importArticle(article, magazine)
+importArticle(article)

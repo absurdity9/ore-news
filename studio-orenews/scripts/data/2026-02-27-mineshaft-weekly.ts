@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly — Ore\'s Revenue Ranking keeps Climbing',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'Top 10 Revenue / Strong Foundation',
   publishedAt: '2026-02-27T00:00:00Z',
+  xUrl: 'https://x.com/zinnresearch',
   intro: [
     'The markets may slow down, but Ore does not. From ecosystem projects launching more marketing and community channels to the Mines continuing to be as busy as ever, there is no slowing down for ORE.',
     'As Ore closes in on the top 10 crypto projects by Holders Revenue for the last year (whilst it has only been ~4 months since its reintroduction), it shows that the strength is simply compounding in this time of market dismay.',
@@ -41,11 +42,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 27 February',
-  week: '27 February',
-  publishedAt: '2026-02-27',
-  url: 'https://x.com/zinnresearch',
-}
-
-importArticle(article, magazine)
+importArticle(article)

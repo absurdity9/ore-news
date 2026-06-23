@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly — 9th Jan \'26',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'stORE, Shielded Privacy & TurboORE',
   publishedAt: '2026-01-09T00:00:00Z',
+  xUrl: 'https://x.com/OREsupply',
   intro: [
     'The first full week of 2026 has been full of updates for Solana native SoV @OREsupply. From launching a LST to having shielded functionality to having a liquidation protected exposure mechanism through TurboORE, HHC and team are nonstop shipping.',
     'This week\'s updates are coming to you through an article instead of a long post thanks to Elon broadening the availability of articles (which means more pictures!)',
@@ -72,11 +73,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 9 January',
-  week: '9 January',
-  publishedAt: '2026-01-09',
-  url: 'https://x.com/OREsupply', // replace with actual X thread URL
-}
-
-importArticle(article, magazine)
+importArticle(article)

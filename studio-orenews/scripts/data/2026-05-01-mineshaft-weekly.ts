@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly — Ore\'s team gains a queen',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'Thep joins Ore / El Dorado green light',
   publishedAt: '2026-05-01T00:00:00Z',
+  xUrl: 'https://x.com/zinnresearch',
   intro: [
     'The mines show no signs of slowing down as Ore retains a top borrowed market on @omnipair, a top 10 position for holders revenue as per @DefiLlama as well as growing the size of the team with the addition of @Theptilla who brings a wealth of experience in community building.',
     'Community creativity and conviction is as strong as ever and updates such as the El Dorado mechanism are in their final discussion stage. This and much more is covered in this weeks edition of the MineShaft Weekly 👇',
@@ -69,11 +70,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 1 May',
-  week: '1 May',
-  publishedAt: '2026-05-01',
-  url: 'https://x.com/zinnresearch',
-}
-
-importArticle(article, magazine)
+importArticle(article)

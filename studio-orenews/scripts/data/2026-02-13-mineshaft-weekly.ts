@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly — Miners Domination',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'Mining Dominance, Minerside Chat with Minemore & Ecosystem Refinement',
   publishedAt: '2026-02-13T00:00:00Z',
+  xUrl: 'https://x.com/zinnresearch',
   intro: [
     'Miners are lining up to get that juicy ORE reward as mining costs fall below the market price. The motherlode hit 695 ORE earlier this week doubling the average amount of sol deployed compared to other motherlodes this week.',
     'The team posted the official Minerside chat recording which is summarized below and miners have increased their dominance in holdings by over 10% this week. Even on a quiet week, a ton has occurred and I\'m happy to bring you another edition of the Mineshaft Weekly to bring you up to date.',
@@ -53,11 +54,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 13 February',
-  week: '13 February',
-  publishedAt: '2026-02-13',
-  url: 'https://x.com/zinnresearch',
-}
-
-importArticle(article, magazine)
+importArticle(article)

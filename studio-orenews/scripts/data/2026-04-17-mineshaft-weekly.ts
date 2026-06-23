@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly — mORE platforms integrate Ore',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'Platform Integrations / Omnipair',
   publishedAt: '2026-04-17T00:00:00Z',
+  xUrl: 'https://x.com/zinnresearch',
   intro: [
     'Ore continues to make strides with two further platform integrations this week alongside a mini movie that is in the works.',
     'In addition to this, there is a Motherlode prediction market being worked on by one of the community members and Ore is dominating the numbers, being #1 ranked in Holders Earnings rate (%) amongst all platforms according to @DefiLlama statistics.',
@@ -73,11 +74,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 17 April',
-  week: '17 April',
-  publishedAt: '2026-04-17',
-  url: 'https://x.com/zinnresearch',
-}
-
-importArticle(article, magazine)
+importArticle(article)

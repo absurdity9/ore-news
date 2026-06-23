@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly — Ore turns 2',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'Ore Turns 2',
   publishedAt: '2026-04-03T00:00:00Z',
+  xUrl: 'https://x.com/zinnresearch',
   intro: [
     'On the 2nd of April 2024, Solana was introduced to a new project by the name of @OREsupply. Little did the ecosystem know how much this idea by @HardhatChad would alter the future of Solana. From halting the chain, relaunching with a v2 that instantly captured 14% of Solana\'s onchain transactions to serving a reintroduction that has cemented itself as a top 15 revenue app in all of crypto.',
     'As we celebrate the 2nd anniversary of Ore we will be exploring some moments in Ore\'s lore alongside this weeks events that include the wrapping up of the Minemaster competition, crossing a milestone of 20,000 Lifetime Users and a potential new mechanism being integrated into mining.',
@@ -100,11 +101,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 3 April',
-  week: '3 April',
-  publishedAt: '2026-04-03',
-  url: 'https://x.com/zinnresearch',
-}
-
-importArticle(article, magazine)
+importArticle(article)

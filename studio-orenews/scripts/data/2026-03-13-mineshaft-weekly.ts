@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly — 100M Satoshis = 1 BTC, 1 ORE = 100B [?]',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'Grams / smallest unit of ORE',
   publishedAt: '2026-03-13T00:00:00Z',
+  xUrl: 'https://x.com/zinnresearch',
   intro: [
     'Well known community member @Fyvieloon posed the question this week: There is 100M Satoshi\'s in a single bitcoin, how many Chads are there in Ore? This triggered a discussion on Discord within the Holder chat of what the decimal unit of ORE is called. @Starship_Fronk then asked for suggestions from holders, which got a huge range of answers. But did you know this has previously been decided. Keep reading to find out what it is!',
   ],
@@ -55,11 +56,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 13 March',
-  week: '13 March',
-  publishedAt: '2026-03-13',
-  url: 'https://x.com/zinnresearch',
-}
-
-importArticle(article, magazine)
+importArticle(article)

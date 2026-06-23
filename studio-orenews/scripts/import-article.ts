@@ -1,4 +1,6 @@
 import {createClient} from '@sanity/client'
+import {createReadStream} from 'fs'
+import {basename} from 'path'
 
 const client = createClient({
   projectId: 'w9x60sjf',
@@ -25,21 +27,18 @@ const TAG_IDS = [
 export interface ArticleInput {
   title: string
   slug: string
+  /** Set to "The MineShaft Weekly" for the article to appear on the newsstand. */
   eyebrow?: string
   subtitle?: string
   publishedAt: string
+  /** Local path to the newsstand cover image (~2.5:1 landscape banner). Required for the shelf. */
+  cover?: string
   intro: string[]
   sections: {heading: string; date?: string; body: string[]}[]
+  /** Link to the X / Twitter thread for this issue. */
   xUrl?: string
   metaDescription?: string
   keywords?: string[]
-}
-
-export interface MagazineInput {
-  title: string
-  week: string
-  publishedAt: string
-  url: string
 }
 
 let keyCounter = 0
@@ -57,9 +56,19 @@ function toBlocks(paragraphs: string[]) {
   }))
 }
 
-export async function importArticle(article: ArticleInput, magazine: MagazineInput) {
+export async function importArticle(article: ArticleInput) {
   if (!process.env.SANITY_TOKEN) {
     throw new Error('Set SANITY_TOKEN env var (create at https://www.sanity.io/manage)')
+  }
+
+  let cover: {_type: 'image'; asset: {_type: 'reference'; _ref: string}} | undefined
+  if (article.cover) {
+    console.log('Uploading cover:', article.cover)
+    const asset = await client.assets.upload('image', createReadStream(article.cover), {
+      filename: basename(article.cover),
+    })
+    cover = {_type: 'image', asset: {_type: 'reference', _ref: asset._id}}
+    console.log('Cover uploaded:', asset._id)
   }
 
   const articleDoc = {
@@ -68,6 +77,7 @@ export async function importArticle(article: ArticleInput, magazine: MagazineInp
     slug: {_type: 'slug', current: article.slug},
     eyebrow: article.eyebrow,
     subtitle: article.subtitle,
+    cover,
     publishedAt: article.publishedAt,
     author: {_type: 'reference', _ref: AUTHOR_ID},
     tags: TAG_IDS.map((id) => ({_type: 'reference', _ref: id, _key: id.slice(-8)})),
@@ -88,19 +98,10 @@ export async function importArticle(article: ArticleInput, magazine: MagazineInp
   const createdArticle = await client.create(articleDoc)
   console.log('Article created:', createdArticle._id)
 
-  const magazineDoc = {
-    _type: 'magazine',
-    title: magazine.title,
-    week: magazine.week,
-    publishedAt: magazine.publishedAt,
-    url: magazine.url,
-    article: {_type: 'reference', _ref: createdArticle._id},
+  if (cover) {
+    console.log('\nDone! Article is on the newsstand (eyebrow + cover set).')
+  } else {
+    console.log('\nDone! Add a Cover Image in Sanity Studio so it appears on the newsstand.')
   }
-
-  console.log('Creating magazine:', magazine.title)
-  const createdMagazine = await client.create(magazineDoc)
-  console.log('Magazine created:', createdMagazine._id)
-
-  console.log('\nDone! Remember to add the cover image in Sanity Studio.')
-  return {articleId: createdArticle._id, magazineId: createdMagazine._id}
+  return {articleId: createdArticle._id}
 }

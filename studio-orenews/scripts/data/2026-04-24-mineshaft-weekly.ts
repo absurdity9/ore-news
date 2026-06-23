@@ -1,4 +1,4 @@
-import {importArticle, type ArticleInput, type MagazineInput} from '../import-article'
+import {importArticle, type ArticleInput} from '../import-article'
 
 const article: ArticleInput = {
   title: 'The MineShaft Weekly — The Mines are Revenue specialists',
@@ -6,6 +6,7 @@ const article: ArticleInput = {
   eyebrow: 'The MineShaft Weekly',
   subtitle: 'Q2 Update / MineMore anniversary',
   publishedAt: '2026-04-24T00:00:00Z',
+  xUrl: 'https://x.com/zinnresearch',
   intro: [
     'With summer approaching and Q2 in full swing, the markets have seen some relief in terms of price action and with this reports on Q1 performance have started being published all over the platform.',
     'One analysis showed that Ore continues to perform with it being ranked 8th in the revenue category out of all Solana Apps showing that whilst the hype may have calmed down, the mines are in full swing.',
@@ -63,11 +64,4 @@ const article: ArticleInput = {
   ],
 }
 
-const magazine: MagazineInput = {
-  title: 'Mineshaft Weekly — 24 April',
-  week: '24 April',
-  publishedAt: '2026-04-24',
-  url: 'https://x.com/zinnresearch',
-}
-
-importArticle(article, magazine)
+importArticle(article)
