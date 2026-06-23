@@ -54,3 +54,13 @@ function renderPortableText(blocks) {
 function escapeHtml(str) {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+
+// Shelf label from a publishedAt date, e.g. "2026-06-19T18:00:00Z" -> "19 June" (UTC, avoids tz drift)
+function formatWeek(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    if (isNaN(d)) return '';
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+    return `${d.getUTCDate()} ${months[d.getUTCMonth()]}`;
+}

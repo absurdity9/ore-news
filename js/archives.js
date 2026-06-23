@@ -14,7 +14,7 @@ async function loadArchives() {
         const isMagazines = grid.classList.contains('archive-grid--magazines');
 
         const items = isMagazines
-            ? await sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) { week, url, "cover": cover.asset->url, "articleSlug": article->slug.current }`)
+            ? await sanityFetch(`*[_type == "article" && eyebrow == "The MineShaft Weekly"] | order(publishedAt desc) { "week": publishedAt, "cover": cover.asset->url, "articleSlug": slug.current }`)
             : await sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode asc) { title, episode, color, videoId, url, "slug": slug.current, "thumbnail": thumbnail.asset->url }`);
 
         const startPage = getPageFromHash();
@@ -54,23 +54,18 @@ function renderPage(items, page, isMagazines) {
 }
 
 function createMagazineCard(mag) {
+    const week = formatWeek(mag.week);
     const link = document.createElement('a');
-    if (mag.articleSlug) {
-        link.href = `article.html?slug=${encodeURIComponent(mag.articleSlug)}`;
-    } else {
-        link.href = mag.url;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-    }
+    link.href = `article.html?slug=${encodeURIComponent(mag.articleSlug)}`;
     link.className = 'archive-card-magazine';
-    link.setAttribute('aria-label', `Mineshaft Weekly — ${mag.week}`);
+    link.setAttribute('aria-label', `Mineshaft Weekly — ${week}`);
 
     link.innerHTML = `
         <div class="archive-card-cover">
-            <img src="${mag.cover}" alt="Mineshaft Weekly — ${mag.week}" loading="lazy">
+            <img src="${mag.cover}" alt="Mineshaft Weekly — ${week}" loading="lazy">
         </div>
         <div class="archive-card-body">
-            <div class="archive-card-date">${mag.week}</div>
+            <div class="archive-card-date">${week}</div>
         </div>
     `;
 

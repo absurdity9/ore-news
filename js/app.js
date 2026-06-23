@@ -12,13 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadContent() {
     try {
-        const [magazines, cds, author] = await Promise.all([
-            sanityFetch(`*[_type == "magazine"] | order(publishedAt desc) [0...9] { week, url, "cover": cover.asset->url, "articleSlug": article->slug.current }`),
+        const WEEKLY = `_type == "article" && eyebrow == "The MineShaft Weekly"`;
+        const [magazines, magCount, cds, author] = await Promise.all([
+            sanityFetch(`*[${WEEKLY}] | order(publishedAt desc) [0...9] { "week": publishedAt, "cover": cover.asset->url, "articleSlug": slug.current }`),
+            sanityFetch(`count(*[${WEEKLY}])`),
             sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode desc) [0...4] { title, episode, color, videoId, url, "slug": slug.current, "thumbnail": thumbnail.asset->url }`),
             sanityFetch(`*[_type == "author"][0] { name, handle, walletAddress }`),
         ]);
 
-        renderMagazines(magazines);
+        renderMagazines(magazines, magCount);
         renderCDs(cds);
         renderDonate({address: author?.walletAddress || '', network: 'Solana'});
     } catch (err) {
@@ -27,14 +29,14 @@ async function loadContent() {
     }
 }
 
-function renderMagazines(magazines) {
+function renderMagazines(magazines, total) {
     const row1 = document.querySelector('#shelf-row-1 .shelf-items');
     const row2 = document.querySelector('#shelf-row-2 .shelf-items');
 
     magazines.slice(0, 5).forEach((mag, i) => row1.appendChild(createMagazineEl(mag, i === 0)));
     magazines.slice(5, 9).forEach(mag => row2.appendChild(createMagazineEl(mag, false)));
 
-    row2.appendChild(createMagazineMoreEl(magazines.length));
+    row2.appendChild(createMagazineMoreEl(total ?? magazines.length));
 }
 
 function createMagazineMoreEl(count) {
@@ -57,23 +59,18 @@ function createMagazineMoreEl(count) {
 }
 
 function createMagazineEl(mag, showCta = false) {
+    const week = formatWeek(mag.week);
     const link = document.createElement('a');
-    if (mag.articleSlug) {
-        link.href = `article.html?slug=${encodeURIComponent(mag.articleSlug)}`;
-    } else {
-        link.href = mag.url;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-    }
+    link.href = `article.html?slug=${encodeURIComponent(mag.articleSlug)}`;
     link.className = 'magazine-item';
-    link.setAttribute('aria-label', `Mineshaft Weekly — ${mag.week} (Tap to Read)`);
+    link.setAttribute('aria-label', `Mineshaft Weekly — ${week} (Tap to Read)`);
 
     link.innerHTML = `
         <div class="magazine-cover">
-            <img class="magazine-cover-img" src="${mag.cover}" alt="Mineshaft Weekly — ${mag.week}" loading="lazy">
+            <img class="magazine-cover-img" src="${mag.cover}" alt="Mineshaft Weekly — ${week}" loading="lazy">
         </div>
         <div class="magazine-label">
-            <span class="magazine-title">${mag.week}</span>
+            <span class="magazine-title">${week}</span>
             ${showCta ? '<span class="magazine-cta">(Tap to Read)</span>' : ''}
         </div>
     `;

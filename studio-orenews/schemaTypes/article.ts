@@ -30,6 +30,12 @@ export const article = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'cover',
+      title: 'Cover Image',
+      type: 'image',
+      description: 'Banner shown on the newsstand / magazine shelf (~2.5:1 landscape). Required for the article to appear on the shelf.',
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published At',
       type: 'datetime',
