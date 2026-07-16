@@ -1947,11 +1947,11 @@ button {
 }
 
 .article-author-avatar {
+    display: block;
+    flex-shrink: 0;
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    vertical-align: middle;
-    margin-right: 0.3rem;
     image-rendering: pixelated;
     border: 1.5px solid rgba(255, 210, 140, 0.3);
 }
@@ -2038,6 +2038,11 @@ button {
 }
 
 .deep-dive-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
     font-family: var(--font-body);
     font-size: 0.85rem;
     color: #a89878;

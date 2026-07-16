@@ -86,7 +86,7 @@ async function loadArticle(slug) {
             const xUrl = article.author.xHandle
                 ? `https://x.com/${article.author.xHandle.replace('@', '')}`
                 : '#';
-            authorEl.innerHTML = `<img class="article-author-avatar" src="images/character.png" alt="" width="28" height="28"> by <a href="${xUrl}" target="_blank" rel="noopener noreferrer">${article.author.handle || article.author.name}</a>`;
+            authorEl.innerHTML = `<img class="article-author-avatar" src="images/character.png" alt="" width="28" height="28"><span>by <a href="${xUrl}" target="_blank" rel="noopener noreferrer">${article.author.handle || article.author.name}</a></span>`;
         }
 
         const introEl = document.getElementById('article-intro');
