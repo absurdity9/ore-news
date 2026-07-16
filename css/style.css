@@ -616,9 +616,10 @@ button {
 
 .cd-items {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-    padding: 6px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 28px;
+    padding: 10px 16px;
+    justify-items: center;
 }
 
 /* Newsstand base */
@@ -759,25 +760,27 @@ button {
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease;
+    min-width: 0;
+    width: 100%;
 }
 
 .cd-disc {
     width: 100%;
-    max-width: 180px;
+    max-width: 128px;
     aspect-ratio: 1;
     border-radius: 50%;
     background:
         radial-gradient(circle at 50% 50%,
-            transparent 36px,
-            rgba(0,0,0,0.3) 36px,
-            rgba(0,0,0,0.3) 40px,
-            var(--cd-color, #4a9eff) 40px,
-            var(--cd-color, #4a9eff) 44px,
-            transparent 44px,
-            transparent 48px,
-            rgba(255,255,255,0.1) 48px,
-            rgba(255,255,255,0.1) 50px,
-            transparent 50px
+            transparent 20%,
+            rgba(0,0,0,0.3) 20%,
+            rgba(0,0,0,0.3) 22%,
+            var(--cd-color, #4a9eff) 22%,
+            var(--cd-color, #4a9eff) 24%,
+            transparent 24%,
+            transparent 27%,
+            rgba(255,255,255,0.1) 27%,
+            rgba(255,255,255,0.1) 28%,
+            transparent 28%
         ),
         conic-gradient(
             from 0deg,
@@ -792,9 +795,9 @@ button {
             rgba(255,255,255,0.15) 360deg
         ),
         radial-gradient(circle at 50% 50%,
-            #f5f5f5 32px,
-            #e0e0e0 33px,
-            var(--cd-color, #4a9eff) 36px
+            #f5f5f5 17%,
+            #e0e0e0 18%,
+            var(--cd-color, #4a9eff) 20%
         ),
         linear-gradient(135deg,
             color-mix(in srgb, var(--cd-color, #4a9eff) 70%, #000) 0%,
@@ -806,6 +809,7 @@ button {
         inset 0 0 20px rgba(0,0,0,0.1);
     border: 1px solid #000;
     position: relative;
+    overflow: hidden;
     transition: transform 0.4s ease, box-shadow 0.3s ease;
 }
 
@@ -814,11 +818,12 @@ button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
+    width: 17%;
+    height: 17%;
     border-radius: 50%;
     background:
-        radial-gradient(circle, #f5f5f5 10px, #d0d0d0 11px, #888 14px, transparent 15px);
+        radial-gradient(circle, #f5f5f5 35%, #d0d0d0 40%, #888 55%, transparent 60%);
+    z-index: 2;
 }
 
 .cd-label {
@@ -826,8 +831,8 @@ button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 110px;
-    height: 110px;
+    width: 68%;
+    height: 68%;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -860,6 +865,7 @@ button {
     color: var(--parchment);
     margin-top: 0.4rem;
     letter-spacing: 0.5px;
+    min-height: 1.1em;
 }
 
 .cd-cta {
@@ -1522,7 +1528,8 @@ button {
     }
 
     .cd-items {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
     }
 
     .pixel-miner {
@@ -1541,8 +1548,9 @@ button {
     }
 
     .cd-disc {
-        width: 150px;
-        height: 150px;
+        width: 112px;
+        height: 112px;
+        max-width: 112px;
     }
 
     .archive-grid--magazines {
@@ -1668,8 +1676,9 @@ button {
     }
 
     .cd-items {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        padding: 8px 12px;
     }
 
     .newsstand {
@@ -1681,8 +1690,9 @@ button {
     }
 
     .cd-disc {
-        width: 130px;
-        height: 130px;
+        width: 100px;
+        height: 100px;
+        max-width: 100px;
     }
 
     .newsstand-plaque h2 {
@@ -1750,8 +1760,9 @@ button {
     }
 
     .cd-disc {
-        width: 85px;
-        height: 85px;
+        width: 78px;
+        height: 78px;
+        max-width: 78px;
     }
 
     .cover-masthead {
