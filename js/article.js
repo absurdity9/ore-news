@@ -24,8 +24,8 @@ async function loadArticle(slug) {
     try {
         const article = await sanityFetch(
             `*[_type == "article" && slug.current == $slug][0] {
-                title, eyebrow, subtitle, publishedAt, xUrl,
-                "author": author-> { name, handle, xHandle, walletAddress },
+                title, eyebrow, subtitle, excerpt, publishedAt, xUrl,
+                "author": author-> { name, handle, xHandle, xUrl, walletAddress },
                 "tags": tags[]-> { title, "slug": slug.current },
                 intro,
                 sections[] { heading, date, body },
@@ -81,12 +81,35 @@ async function loadArticle(slug) {
             subtitleEl.style.display = '';
         }
 
+        // Active nav: Articles for ecosystem essays, Deep Dive for deep-dive content
+        const nav = document.querySelector('.ore-tally-nav');
+        if (nav) {
+            nav.querySelectorAll('a').forEach((a) => a.classList.remove('active'));
+            if (article.eyebrow === 'Article') {
+                const articlesLink = nav.querySelector('a[href="articles.html"]');
+                if (articlesLink) articlesLink.classList.add('active');
+            } else if (article.eyebrow === 'Deep Dive' || slug === 'the-history-of-ore') {
+                const deepDiveLink = nav.querySelector('a[href="deep-dive.html"], a[href*="the-history-of-ore"]');
+                if (deepDiveLink) deepDiveLink.classList.add('active');
+            }
+        }
+
         if (article.author) {
             const authorEl = document.getElementById('article-author');
-            const xUrl = article.author.xHandle
-                ? `https://x.com/${article.author.xHandle.replace('@', '')}`
-                : '#';
-            authorEl.innerHTML = `<img class="article-author-avatar" src="images/character.png" alt="" width="28" height="28"><span>by <a href="${xUrl}" target="_blank" rel="noopener noreferrer">${article.author.handle || article.author.name}</a></span>`;
+            const xUrl = article.author.xUrl
+                || (article.author.xHandle
+                    ? `https://x.com/${article.author.xHandle.replace('@', '')}`
+                    : '#');
+            const displayName = article.author.name || article.author.handle || 'Author';
+            const dateLabel = article.publishedAt
+                ? new Date(article.publishedAt).toLocaleDateString('en-GB', {
+                    day: 'numeric', month: 'short', year: 'numeric',
+                })
+                : '';
+            authorEl.innerHTML =
+                `<img class="article-author-avatar" src="images/character.png" alt="" width="28" height="28">` +
+                `<span>by <a href="${xUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(displayName)}</a>` +
+                `${dateLabel ? ` · ${escapeHtml(dateLabel)}` : ''}</span>`;
         }
 
         const introEl = document.getElementById('article-intro');
