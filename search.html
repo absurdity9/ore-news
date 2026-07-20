@@ -81,7 +81,20 @@
                         <input type="search" id="search-input" class="search-input" placeholder="Search articles and podcasts..." autocomplete="off" autofocus>
                     </div>
                 </div>
-                <div id="search-results" class="search-results"></div>
+                <div class="search-split" id="search-split">
+                    <div class="search-list-pane" id="search-list-pane">
+                        <div id="search-results" class="search-results"></div>
+                    </div>
+                    <div class="search-detail-pane" id="search-detail-pane" aria-live="polite">
+                        <button type="button" class="search-detail-back" id="search-detail-back" hidden>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                            Results
+                        </button>
+                        <div id="search-detail" class="search-detail">
+                            <p class="search-detail-empty">Select a result to read</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -91,6 +104,6 @@
     </footer>
 
     <script src="js/sanity.js?v=20260720"></script>
-    <script src="js/search.js?v=20260720b"></script>
+    <script src="js/search.js?v=20260720c"></script>
 </body>
 </html>
