@@ -183,10 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!results.length) return;
         if (e.key === 'ArrowDown') {
             e.preventDefault();
-            selectIndex(Math.min(selectedIndex + 1, results.length - 1), { showPane: false, focusRow: true });
+            selectIndex(Math.min(selectedIndex + 1, results.length - 1), { showPane: true, focusRow: true });
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            selectIndex(Math.max(selectedIndex - 1, 0), { showPane: false, focusRow: true });
+            selectIndex(Math.max(selectedIndex - 1, 0), { showPane: true, focusRow: true });
         } else if (e.key === 'Enter' && selectedIndex >= 0) {
             e.preventDefault();
             const href = fullPageHref(results[selectedIndex]);
