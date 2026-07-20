@@ -55,18 +55,25 @@ document.addEventListener('DOMContentLoaded', () => {
         backBtn.hidden = !open || !isMobileSplit();
     }
 
-    function showDetailEmpty(message) {
-        detailEl.innerHTML = `<p class="search-detail-empty">${escapeHtml(message)}</p>`;
+    function hideDetailPane() {
         setDetailMode(false);
+        detailEl.innerHTML = '';
+    }
+
+    function showDetailPane() {
+        setDetailMode(true);
     }
 
     function showDetailLoading() {
+        showDetailPane();
         detailEl.innerHTML =
             '<div class="search-loading search-detail-loading">' +
                 '<span class="search-loading-text">Loading</span>' +
                 '<span class="search-loading-dots"><span></span><span></span><span></span></span>' +
             '</div>';
     }
+
+    hideDetailPane();
 
     function badgeFor(item) {
         if (item._type === 'podcast') return { label: 'Podcast', className: 'search-badge--podcast' };
@@ -140,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedIndex = -1;
             activeQuery = '';
             resultsEl.innerHTML = '';
-            showDetailEmpty('Select a result to read');
+            hideDetailPane();
             return;
         }
         debounceTimer = setTimeout(() => runSearch(query), 300);
@@ -150,10 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!results.length) return;
         if (e.key === 'ArrowDown') {
             e.preventDefault();
-            selectIndex(Math.min(selectedIndex + 1, results.length - 1), { openMobile: false });
+            selectIndex(Math.min(selectedIndex + 1, results.length - 1), { showPane: false });
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            selectIndex(Math.max(selectedIndex - 1, 0), { openMobile: false });
+            selectIndex(Math.max(selectedIndex - 1, 0), { showPane: false });
         } else if (e.key === 'Enter' && selectedIndex >= 0) {
             const href = fullPageHref(results[selectedIndex]);
             if (href) {
@@ -170,10 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!results.length) return;
         if (e.key === 'ArrowDown') {
             e.preventDefault();
-            selectIndex(Math.min(selectedIndex + 1, results.length - 1), { openMobile: false, focusRow: true });
+            selectIndex(Math.min(selectedIndex + 1, results.length - 1), { showPane: false, focusRow: true });
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            selectIndex(Math.max(selectedIndex - 1, 0), { openMobile: false, focusRow: true });
+            selectIndex(Math.max(selectedIndex - 1, 0), { showPane: false, focusRow: true });
         } else if (e.key === 'Enter' && selectedIndex >= 0) {
             e.preventDefault();
             const href = fullPageHref(results[selectedIndex]);
@@ -188,17 +195,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     backBtn.addEventListener('click', () => {
-        setDetailMode(false);
+        hideDetailPane();
         const row = resultsEl.querySelector('.search-card.is-selected');
         if (row) row.focus();
     });
 
     window.addEventListener('resize', () => {
+        const detailOpen = splitEl.classList.contains('is-detail-open');
         if (!isMobileSplit()) {
             backBtn.hidden = true;
-            splitEl.classList.remove('is-detail-open');
-        } else if (selectedIndex >= 0 && detailEl.querySelector('.search-detail-body')) {
-            backBtn.hidden = false;
+        } else {
+            backBtn.hidden = !detailOpen;
         }
     });
 
@@ -210,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
             results = [];
             selectedIndex = -1;
             resultsEl.innerHTML = '';
-            showDetailEmpty('Select a result to read');
+            hideDetailPane();
             return;
         }
         runSearch(q, { type, slug });
@@ -231,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 '<span class="search-loading-text">Searching</span>' +
                 '<span class="search-loading-dots"><span></span><span></span><span></span></span>' +
             '</div>';
-        showDetailEmpty('Select a result to read');
+        hideDetailPane();
         selectedIndex = -1;
 
         try {
@@ -251,19 +258,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            let index = 0;
             if (prefer && prefer.slug && prefer.type) {
                 const found = results.findIndex(
                     (r) => r._type === prefer.type && r.slug === prefer.slug
                 );
-                if (found >= 0) index = found;
+                if (found >= 0) {
+                    selectIndex(found, { showPane: true, focusDetail: isMobileSplit() });
+                }
             }
-            selectIndex(index, { openMobile: Boolean(prefer && prefer.slug) });
         } catch (err) {
             console.error('Search failed:', err);
             results = [];
             resultsEl.innerHTML = `<p class="search-status">Search failed: ${escapeHtml(err.message)}</p>`;
-            showDetailEmpty('Select a result to read');
+            hideDetailPane();
         }
     }
 
@@ -320,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsEl.querySelectorAll('.search-card').forEach((btn) => {
             btn.addEventListener('click', () => {
                 const index = Number(btn.dataset.index);
-                selectIndex(index, { openMobile: true, focusDetail: isMobileSplit() });
+                selectIndex(index, { showPane: true, focusDetail: isMobileSplit() });
             });
         });
     }
@@ -359,30 +366,31 @@ document.addEventListener('DOMContentLoaded', () => {
             if (opts.focusRow) row.focus();
         }
 
-        syncUrl(activeQuery || input.value.trim(), item);
-        loadDetail(item, opts);
+        syncUrl(activeQuery || input.value.trim(), opts.showPane ? item : null);
+        if (opts.showPane) {
+            loadDetail(item, opts);
+        }
     }
 
     async function loadDetail(item, opts = {}) {
         const requestId = ++detailRequestId;
         const key = resultKey(item);
-        const openMobile = opts.openMobile !== false;
 
         if (detailCache.has(key)) {
+            showDetailPane();
             renderDetail(item, detailCache.get(key));
-            if (openMobile && isMobileSplit()) setDetailMode(true);
             if (opts.focusDetail) detailEl.focus();
             return;
         }
 
         if (!item.slug) {
+            showDetailPane();
             renderExternalDetail(item);
-            if (openMobile && isMobileSplit()) setDetailMode(true);
+            if (opts.focusDetail) detailEl.focus();
             return;
         }
 
         showDetailLoading();
-        if (openMobile && isMobileSplit()) setDetailMode(true);
 
         try {
             const doc = item._type === 'article'
@@ -390,10 +398,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 : await fetchPodcastDetail(item.slug);
             if (requestId !== detailRequestId) return;
             if (!doc) {
+                showDetailPane();
                 detailEl.innerHTML = `<p class="search-detail-empty">Content not found</p>`;
                 return;
             }
             detailCache.set(key, doc);
+            showDetailPane();
             renderDetail(item, doc);
             if (opts.focusDetail) {
                 detailEl.setAttribute('tabindex', '-1');
@@ -402,6 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (err) {
             if (requestId !== detailRequestId) return;
             console.error('Detail load failed:', err);
+            showDetailPane();
             detailEl.innerHTML = `<p class="search-detail-empty">Failed to load: ${escapeHtml(err.message)}</p>`;
         }
     }
