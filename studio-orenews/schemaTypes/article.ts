@@ -15,19 +15,38 @@ export const article = defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: {source: 'title'},
-      validation: (rule) => rule.required(),
+      options: {source: 'title', isUnique: (value, context) => context.defaultIsUnique(value, context)},
+      validation: (rule) =>
+        rule.required().custom(async (slug, context) => {
+          if (!slug?.current) return true
+          const {document, getClient} = context
+          const client = getClient({apiVersion: '2024-01-01'})
+          const id = document?._id?.replace(/^drafts\./, '')
+          const existing = await client.fetch(
+            `count(*[_type == "article" && slug.current == $slug && !(_id in [$id, "drafts." + $id])])`,
+            {slug: slug.current, id: id || ''},
+          )
+          return existing === 0 || 'Slug must be unique'
+        }),
     }),
     defineField({
       name: 'eyebrow',
       title: 'Eyebrow',
       type: 'string',
-      description: 'Label above the title, e.g. "The MineShaft Weekly" or "Deep Dive"',
+      description:
+        'Label above the title. Use "The MineShaft Weekly" for the newsstand, "Deep Dive" for deep dives, or "Article" for long-form ecosystem essays.',
     }),
     defineField({
       name: 'subtitle',
       title: 'Subtitle',
       type: 'string',
+    }),
+    defineField({
+      name: 'excerpt',
+      title: 'Excerpt',
+      type: 'text',
+      rows: 3,
+      description: 'Short summary shown on the Articles listing and in search snippets.',
     }),
     defineField({
       name: 'cover',
@@ -116,7 +135,13 @@ export const article = defineType({
       name: 'xUrl',
       title: 'X Post URL',
       type: 'url',
-      description: 'Link to the corresponding X / Twitter post',
+      description: 'Link to the corresponding X / Twitter post or article',
+    }),
+    defineField({
+      name: 'sourceDocUrl',
+      title: 'Source Google Doc URL',
+      type: 'url',
+      description: 'Editorial reference — original Google Doc used for import',
     }),
     defineField({
       name: 'metaDescription',

@@ -21,7 +21,13 @@ export const author = defineType({
       name: 'xHandle',
       title: 'X / Twitter Handle',
       type: 'string',
-      description: 'e.g. @zinnresearch',
+      description: 'e.g. @zinnresearch — used to build the author profile URL (https://x.com/…)',
+    }),
+    defineField({
+      name: 'xUrl',
+      title: 'X Profile URL',
+      type: 'url',
+      description: 'Optional full profile URL. Prefer xHandle when both are set.',
     }),
     defineField({
       name: 'avatar',

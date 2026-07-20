@@ -39,12 +39,17 @@ document.addEventListener('DOMContentLoaded', () => {
             `*[_type == "article" && (
                 title match $q ||
                 subtitle match $q ||
+                excerpt match $q ||
                 sections[].heading match $q ||
                 pt::text(intro) match $q ||
-                pt::text(sections[].body) match $q
+                pt::text(sections[].body) match $q ||
+                author->name match $q ||
+                author->xHandle match $q ||
+                tags[]->title match $q
             )] | order(publishedAt desc) {
-                _type, title, subtitle, "slug": slug.current, publishedAt,
-                "fallbackSnippet": coalesce(subtitle, sections[0].heading),
+                _type, title, subtitle, excerpt, eyebrow, "slug": slug.current, publishedAt,
+                "authorName": author->name,
+                "fallbackSnippet": coalesce(excerpt, subtitle, sections[0].heading),
                 "bodyText": coalesce(pt::text(intro), "") + " " + coalesce(pt::text(sections[].body), "")
             }`,
             { q: q + '*' }
@@ -80,7 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderCard(item, index, query) {
         const isArticle = item._type === 'article';
-        const badge = isArticle ? 'Article' : 'Podcast';
+        const badge = isArticle
+            ? (item.eyebrow === 'The MineShaft Weekly' ? 'Weekly' : item.eyebrow === 'Deep Dive' ? 'Deep Dive' : 'Article')
+            : 'Podcast';
         const badgeClass = isArticle ? 'search-badge--article' : 'search-badge--podcast';
         const internalHref = isArticle
             ? (item.slug ? `article.html?slug=${encodeURIComponent(item.slug)}` : null)
@@ -88,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const href = internalHref || item.url || '#';
         const target = internalHref ? '' : ' target="_blank" rel="noopener noreferrer"';
         const date = formatDate(item.publishedAt);
+        const authorBit = item.authorName ? `${item.authorName} · ` : '';
         const snippet = extractSnippet(item, query);
         const delay = Math.min(index * 60, 400);
 
@@ -95,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="search-badge ${badgeClass}">${badge}</span>
             <span class="search-card-body">
                 <span class="search-card-title">${escapeHtml(item.title)}</span>
-                <span class="search-card-meta">${date}</span>
+                <span class="search-card-meta">${escapeHtml(authorBit)}${date}</span>
                 ${snippet ? `<span class="search-card-snippet">${escapeHtml(snippet)}</span>` : ''}
             </span>
         </a>`;
@@ -113,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function extractSnippet(item, query) {
-        const haystack = [item.title, item.subtitle || item.description, item.bodyText]
+        const haystack = [item.title, item.excerpt, item.subtitle || item.description, item.authorName, item.bodyText]
             .filter(Boolean)
             .join('. ')
             .replace(/\s+/g, ' ')

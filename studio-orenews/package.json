@@ -10,7 +10,8 @@
     "deploy-graphql": "sanity graphql deploy",
     "dev": "sanity dev",
     "start": "sanity start",
-    "seed:diggy": "tsx --env-file=.env.local scripts/seed-diggy-podcast.ts"
+    "seed:diggy": "tsx --env-file=.env.local scripts/seed-diggy-podcast.ts",
+    "import:ecosystem-articles": "tsx scripts/import-ecosystem-articles.ts"
   },
   "keywords": [
     "sanity"
