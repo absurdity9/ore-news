@@ -2724,7 +2724,7 @@ button {
 }
 
 .search-detail-pane {
-    display: none;
+    display: none !important;
     position: relative;
     padding: 1.25rem 1.5rem 2rem;
     background:
@@ -2737,11 +2737,8 @@ button {
         0 12px 36px rgba(0, 0, 0, 0.4);
 }
 
-.search-detail-pane[hidden] {
-    display: none !important;
-}
-
-.search-split.is-detail-open .search-detail-pane:not([hidden]) {
+/* Class is the sole visibility switch — beats [hidden] UA styles */
+.search-split.is-detail-open .search-detail-pane {
     display: block !important;
 }
 

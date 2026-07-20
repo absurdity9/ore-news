@@ -261,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!results.length) {
                 syncUrl(query, null);
+                hideDetailPane();
                 return;
             }
 
@@ -271,9 +272,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
                 if (found >= 0) index = found;
             }
-            // Open detail for the first (or URL-preferred) result after a search
+
+            // Desktop: open right column immediately with first (or preferred) result.
+            // Mobile: keep list visible unless restoring a shared detail URL.
+            const openPane = !isMobileSplit() || Boolean(prefer && prefer.slug);
             selectIndex(index, {
-                showPane: true,
+                showPane: openPane,
                 focusDetail: Boolean(prefer && prefer.slug && isMobileSplit()),
             });
         } catch (err) {
@@ -376,8 +380,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (opts.focusRow) row.focus();
         }
 
-        syncUrl(activeQuery || input.value.trim(), opts.showPane ? item : null);
-        if (opts.showPane) {
+        syncUrl(activeQuery || input.value.trim(), opts.showPane !== false ? item : null);
+        if (opts.showPane !== false) {
+            // Show the column immediately (loading state), then fill content
+            showDetailLoading();
             loadDetail(item, opts);
         }
     }
@@ -385,22 +391,19 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadDetail(item, opts = {}) {
         const requestId = ++detailRequestId;
         const key = resultKey(item);
+        showDetailPane();
 
         if (detailCache.has(key)) {
-            showDetailPane();
             renderDetail(item, detailCache.get(key));
             if (opts.focusDetail) detailEl.focus();
             return;
         }
 
         if (!item.slug) {
-            showDetailPane();
             renderExternalDetail(item);
             if (opts.focusDetail) detailEl.focus();
             return;
         }
-
-        showDetailLoading();
 
         try {
             const doc = item._type === 'article'
@@ -408,12 +411,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 : await fetchPodcastDetail(item.slug);
             if (requestId !== detailRequestId) return;
             if (!doc) {
-                showDetailPane();
                 detailEl.innerHTML = `<p class="search-detail-empty">Content not found</p>`;
                 return;
             }
             detailCache.set(key, doc);
-            showDetailPane();
             renderDetail(item, doc);
             if (opts.focusDetail) {
                 detailEl.setAttribute('tabindex', '-1');
@@ -422,7 +423,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (err) {
             if (requestId !== detailRequestId) return;
             console.error('Detail load failed:', err);
-            showDetailPane();
             detailEl.innerHTML = `<p class="search-detail-empty">Failed to load: ${escapeHtml(err.message)}</p>`;
         }
     }
