@@ -2723,8 +2723,11 @@ button {
     overscroll-behavior: contain;
 }
 
+.search-detail-pane[hidden] {
+    display: none !important;
+}
+
 .search-detail-pane {
-    display: none;
     position: relative;
     padding: 1.25rem 1.5rem 2rem;
     background:

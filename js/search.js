@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('search-input');
     const resultsEl = document.getElementById('search-results');
     const detailEl = document.getElementById('search-detail');
+    const detailPaneEl = document.getElementById('search-detail-pane');
     const splitEl = document.getElementById('search-split');
     const backBtn = document.getElementById('search-detail-back');
 
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setDetailMode(open) {
         splitEl.classList.toggle('is-detail-open', open);
+        detailPaneEl.hidden = !open;
         backBtn.hidden = !open || !isMobileSplit();
     }
 
