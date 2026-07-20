@@ -2723,11 +2723,8 @@ button {
     overscroll-behavior: contain;
 }
 
-.search-detail-pane[hidden] {
-    display: none !important;
-}
-
 .search-detail-pane {
+    display: none;
     position: relative;
     padding: 1.25rem 1.5rem 2rem;
     background:
@@ -2740,8 +2737,12 @@ button {
         0 12px 36px rgba(0, 0, 0, 0.4);
 }
 
-.search-split.is-detail-open .search-detail-pane {
-    display: block;
+.search-detail-pane[hidden] {
+    display: none !important;
+}
+
+.search-split.is-detail-open .search-detail-pane:not([hidden]) {
+    display: block !important;
 }
 
 .search-detail-back {

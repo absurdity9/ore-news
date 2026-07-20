@@ -53,7 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setDetailMode(open) {
         splitEl.classList.toggle('is-detail-open', open);
-        detailPaneEl.hidden = !open;
+        if (open) {
+            detailPaneEl.removeAttribute('hidden');
+        } else {
+            detailPaneEl.setAttribute('hidden', '');
+        }
         backBtn.hidden = !open || !isMobileSplit();
     }
 
@@ -159,10 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!results.length) return;
         if (e.key === 'ArrowDown') {
             e.preventDefault();
-            selectIndex(Math.min(selectedIndex + 1, results.length - 1), { showPane: false });
+            selectIndex(Math.min(selectedIndex + 1, results.length - 1), { showPane: true });
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            selectIndex(Math.max(selectedIndex - 1, 0), { showPane: false });
+            selectIndex(Math.max(selectedIndex - 1, 0), { showPane: true });
         } else if (e.key === 'Enter' && selectedIndex >= 0) {
             const href = fullPageHref(results[selectedIndex]);
             if (href) {
@@ -260,14 +264,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            let index = 0;
             if (prefer && prefer.slug && prefer.type) {
                 const found = results.findIndex(
                     (r) => r._type === prefer.type && r.slug === prefer.slug
                 );
-                if (found >= 0) {
-                    selectIndex(found, { showPane: true, focusDetail: isMobileSplit() });
-                }
+                if (found >= 0) index = found;
             }
+            // Open detail for the first (or URL-preferred) result after a search
+            selectIndex(index, {
+                showPane: true,
+                focusDetail: Boolean(prefer && prefer.slug && isMobileSplit()),
+            });
         } catch (err) {
             console.error('Search failed:', err);
             results = [];
