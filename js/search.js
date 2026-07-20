@@ -3,15 +3,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsEl = document.getElementById('search-results');
     let debounceTimer = null;
 
+    function getQueryFromUrl() {
+        return new URLSearchParams(location.search).get('q')?.trim() || '';
+    }
+
+    function syncUrl(query) {
+        const url = new URL(location.href);
+        if (query.length >= 2) {
+            url.searchParams.set('q', query);
+        } else {
+            url.searchParams.delete('q');
+        }
+        const next = url.pathname + url.search + url.hash;
+        const current = location.pathname + location.search + location.hash;
+        if (next !== current) {
+            history.replaceState(null, '', next);
+        }
+    }
+
     input.addEventListener('input', () => {
         clearTimeout(debounceTimer);
         const query = input.value.trim();
+        syncUrl(query);
         if (query.length < 2) {
             resultsEl.innerHTML = '';
             return;
         }
         debounceTimer = setTimeout(() => runSearch(query), 300);
     });
+
+    window.addEventListener('popstate', () => {
+        const query = getQueryFromUrl();
+        input.value = query;
+        clearTimeout(debounceTimer);
+        if (query.length < 2) {
+            resultsEl.innerHTML = '';
+            return;
+        }
+        runSearch(query);
+    });
+
+    const initialQuery = getQueryFromUrl();
+    if (initialQuery) {
+        input.value = initialQuery;
+        if (initialQuery.length >= 2) {
+            runSearch(initialQuery);
+        }
+    }
 
     async function runSearch(query) {
         resultsEl.innerHTML =
