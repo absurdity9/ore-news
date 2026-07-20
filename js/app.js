@@ -17,7 +17,9 @@ async function loadContent() {
             sanityFetch(`*[${WEEKLY}] | order(publishedAt desc) [0...9] { "week": publishedAt, "cover": cover.asset->url, "articleSlug": slug.current }`),
             sanityFetch(`count(*[${WEEKLY}])`),
             sanityFetch(`*[_type == "podcast" && show == "ore-insiders"] | order(episode desc) [0...4] { title, episode, color, videoId, url, "slug": slug.current, "thumbnail": thumbnail.asset->url }`),
-            sanityFetch(`*[_type == "author"][0] { name, handle, walletAddress }`),
+            // Prefer an author with a tip address — bare [0] can pick a guest
+            // author (e.g. after Articles import) whose walletAddress is empty.
+            sanityFetch(`*[_type == "author" && defined(walletAddress) && walletAddress != ""][0] { name, handle, walletAddress }`),
         ]);
 
         renderMagazines(magazines, magCount);
